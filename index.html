@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light"><title>Thai Vocab Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Khand:wght@700&family=Hind:wght@400;600&family=Noto+Sans+Thai:wght@400;600&display=swap">
+<style>
+:root{--mw-background:#fff;--mw-foreground:#0a0a0a;--mw-primary:#171717;--mw-primary-foreground:#fafafa;--mw-secondary:#f5f5f5;--mw-muted-text:#737373;--mw-border:#e5e5e5;
+--mw-font-heading:"Khand","Arial Narrow",system-ui,sans-serif;--mw-font-body:"Hind",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+--thai:"Noto Sans Thai","Sarabun","Thonburi","Leelawadee UI","Tahoma",sans-serif;--mw-radius:.625rem;--mw-tracking-label:.1em;--mw-ease:cubic-bezier(.2,.8,.2,1);--mw-dur:180ms;
+--ok:#eef3ee;--bad:#f6eeee;color-scheme:light}
+.mw-hover{transition:transform var(--mw-dur) var(--mw-ease),box-shadow var(--mw-dur) var(--mw-ease),background-color var(--mw-dur) var(--mw-ease),color var(--mw-dur) var(--mw-ease)}
+.mw-hover:hover,.mw-hover:focus-visible{transform:translateY(-1px) scale(1.03);box-shadow:0 6px 18px rgba(10,10,10,.12)}
+.mw-hover:active{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){.mw-hover,.mw-hover:hover{transition:none;transform:none}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--mw-background);color:var(--mw-foreground);font-family:var(--mw-font-body);-webkit-text-size-adjust:100%}
+body{min-height:100vh;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.wrap{max-width:640px;margin:0 auto;padding:16px 18px 8px}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.wm{font-family:var(--mw-font-heading);font-weight:700;letter-spacing:var(--mw-tracking-label);font-size:13px;color:var(--mw-muted-text)}
+h1,h2{font-family:var(--mw-font-heading);font-weight:700;line-height:1.1;letter-spacing:-.01em;margin:0}
+h1{font-size:34px}h2{font-size:28px;margin-bottom:8px}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.btn{font-family:var(--mw-font-body);font-weight:600;text-transform:uppercase;letter-spacing:var(--mw-tracking-label);font-size:13px;min-height:44px;padding:10px 14px;border:2px solid var(--mw-primary);border-radius:0;background:#fff;color:var(--mw-primary);cursor:pointer}
+.btn.on,.btn.solid{background:var(--mw-primary);color:var(--mw-primary-foreground)}
+.btn.sm{font-size:12px;padding:8px 10px;flex:1 1 auto}
+.stats{display:flex;justify-content:space-between;font-size:14px;color:var(--mw-muted-text);margin:4px 0 6px}
+.bar{height:4px;background:var(--mw-secondary);margin-bottom:14px}.bar i{display:block;height:100%;background:var(--mw-primary);width:0;transition:width .3s}
+.card{background:var(--mw-secondary);border-radius:.75rem;padding:22px 16px;text-align:center;margin-bottom:14px}
+.num{font-size:12px;color:var(--mw-muted-text);letter-spacing:var(--mw-tracking-label);text-transform:uppercase}
+.rom{font-family:var(--mw-font-body);font-weight:600;font-size:40px;line-height:1.2;margin:6px 0 2px;word-break:break-word}
+.thai{font-family:var(--thai);font-size:38px;line-height:1.5}
+.tone{font-size:13px;color:var(--mw-muted-text);margin-top:4px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;text-transform:none;letter-spacing:0;font-size:18px;font-weight:400;min-height:60px;padding:12px 14px;width:100%}
+.opt .k{font-family:var(--mw-font-heading);font-size:16px;width:24px;height:24px;flex:none;border:1.5px solid currentColor;display:grid;place-items:center;opacity:.6}
+.opt .ic{margin-left:auto;flex:none;width:22px;height:22px}
+.opt.ok{background:var(--ok);border-color:var(--mw-primary)}
+.opt.bad{background:var(--bad);border-color:var(--mw-muted-text);color:var(--mw-muted-text);border-style:dashed}
+.opt.dim{border-color:var(--mw-border);color:var(--mw-muted-text)}
+.opt:disabled{cursor:default}.opt:disabled:hover{transform:none;box-shadow:none}
+.fb{min-height:28px;margin:12px 0 6px;font-weight:600;text-align:center}
+.next{width:100%;min-height:52px}
+.hide{display:none!important}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.row .btn{flex:1}
+.miss{list-style:none;padding:0;margin:8px 0}.miss li{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--mw-border)}
+.miss b{font-weight:600}.miss .t{font-family:var(--thai);font-size:20px}.miss .e{color:var(--mw-muted-text)}
+footer{text-align:center;font-size:13px;color:var(--mw-muted-text);padding:28px 0 12px}
+footer a{color:var(--mw-muted-text);text-decoration:none;border-bottom:1px solid rgba(115,115,115,.3);display:inline-block}footer a:hover{color:var(--mw-foreground);border-color:var(--mw-foreground)}
+.sharebar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);border-top:1px solid var(--mw-border);padding:10px 18px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:8px}
+.sharebar .btn{min-width:160px}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--mw-primary);padding:8px 14px;font-size:14px}
+.reset{background:none;border:none;color:var(--mw-muted-text);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;min-height:44px;padding:0 4px}
+@media (min-width:900px){.wrap{padding-top:36px}h1{font-size:44px}.opts{grid-template-columns:1fr 1fr}.rom{font-size:48px}.thai{font-size:46px}}
+</style></head><body>
+<div class="wrap">
+<header><h1>Thai Vocab Quiz</h1><span class="wm">MAX WEBERMAN</span></header>
+<div class="filters" id="filters"></div>
+<div class="stats"><span id="prog"></span><span id="score"></span></div>
+<div class="bar"><i id="barf"></i></div>
+<section id="quiz">
+ <div class="card"><div class="num" id="num"></div><div class="rom" id="rom"></div><div class="thai" id="thai" lang="th"></div><div class="tone" id="tone"></div></div>
+ <div class="opts" id="opts"></div>
+ <div class="fb" id="fb" aria-live="polite"></div>
+ <button class="btn solid next mw-hover hide" id="next">Next ↵</button>
+</section>
+<section id="done" class="hide">
+ <h2>Round Complete</h2><p id="sum"></p><div id="missWrap"><h2 style="font-size:22px">Missed Words</h2><ul class="miss" id="missList"></ul></div>
+ <div class="row"><button class="btn mw-hover" id="retry">Retry Missed</button><button class="btn solid mw-hover" id="newr">New Round</button></div>
+</section>
+<div style="text-align:center;margin-top:10px"><button class="reset" id="reset">Reset Progress</button></div>
+<footer><a class="mw-hover" href="https://maxweberman.com" target="_blank" rel="noopener">Built by Max Weberman</a></footer>
+</div>
+<div class="sharebar"><button class="btn mw-hover" id="share">Share</button></div>
+<script>
+const DATA=[{"n": 1, "en": "hurts", "rom": "jèp", "th": "เจ็บ", "tone": "low"}, {"n": 2, "en": "it", "rom": "man", "th": "มัน", "tone": "flat"}, {"n": 3, "en": "stubborn", "rom": "dêua", "th": "ดื้อ", "tone": "falling"}, {"n": 4, "en": "invite", "rom": "choen", "th": "เชิญ", "tone": "flat"}, {"n": 5, "en": "rich", "rom": "ruay", "th": "รวย", "tone": "flat"}, {"n": 6, "en": "rumor", "rom": "khàao-luea", "th": "ข่าวลือ", "tone": "low + flat"}, {"n": 7, "en": "show off", "rom": "ùuat", "th": "อวด", "tone": "low"}, {"n": 8, "en": "cup", "rom": "thûay", "th": "ถ้วย", "tone": "falling"}, {"n": 9, "en": "fill", "rom": "toem", "th": "เติม", "tone": "flat"}, {"n": 10, "en": "false", "rom": "thét", "th": "เท็จ", "tone": "high"}, {"n": 11, "en": "on", "rom": "bon", "th": "บน", "tone": "flat"}, {"n": 12, "en": "open", "rom": "bpèrt", "th": "เปิด", "tone": "low"}, {"n": 13, "en": "beautiful", "rom": "sǔay", "th": "สวย", "tone": "rising"}, {"n": 14, "en": "bitter", "rom": "khǒm", "th": "ขม", "tone": "rising"}, {"n": 15, "en": "fast", "rom": "reo", "th": "เร็ว", "tone": "flat"}, {"n": 16, "en": "cut", "rom": "dtàt", "th": "ตัด", "tone": "low"}, {"n": 17, "en": "beyond", "rom": "gern", "th": "เกิน", "tone": "flat"}, {"n": 18, "en": "endure", "rom": "thon", "th": "ทน", "tone": "flat"}, {"n": 19, "en": "buy", "rom": "súue", "th": "ซื้อ", "tone": "high"}, {"n": 20, "en": "pick up", "rom": "ráp", "th": "รับ", "tone": "high"}, {"n": 21, "en": "time", "rom": "wee-laa", "th": "เวลา", "tone": "flat + flat"}, {"n": 22, "en": "fresh", "rom": "sòt", "th": "สด", "tone": "low"}, {"n": 23, "en": "hands", "rom": "meua", "th": "มือ", "tone": "flat"}, {"n": 24, "en": "carry", "rom": "thǔue", "th": "ถือ", "tone": "rising"}, {"n": 25, "en": "pen", "rom": "bpàak-gaa", "th": "ปากกา", "tone": "low + flat"}, {"n": 26, "en": "wind", "rom": "lom", "th": "ลม", "tone": "flat"}, {"n": 27, "en": "religion", "rom": "sàat-sà-nǎa", "th": "ศาสนา", "tone": "low + low + rising"}, {"n": 28, "en": "bottle", "rom": "khùuat", "th": "ขวด", "tone": "low"}, {"n": 29, "en": "How much?", "rom": "thâo-rài", "th": "เท่าไหร่", "tone": "falling + low"}, {"n": 30, "en": "not spicy", "rom": "mâi phèt", "th": "ไม่เผ็ด", "tone": "falling + low"}, {"n": 31, "en": "delicious", "rom": "à-ròi", "th": "อร่อย", "tone": "low + low"}, {"n": 32, "en": "salt", "rom": "gluea", "th": "เกลือ", "tone": "flat"}, {"n": 33, "en": "butter", "rom": "noei", "th": "เนย", "tone": "flat"}, {"n": 34, "en": "begin", "rom": "rôerm", "th": "เริ่ม", "tone": "falling"}, {"n": 35, "en": "needle", "rom": "khěm", "th": "เข็ม", "tone": "rising"}, {"n": 36, "en": "ready", "rom": "phróm", "th": "พร้อม", "tone": "high"}, {"n": 37, "en": "wide", "rom": "gwâang", "th": "กว้าง", "tone": "falling"}, {"n": 38, "en": "just / approx. (also: tattoo)", "rom": "sàk", "th": "สัก", "tone": "low"}, {"n": 39, "en": "meal", "rom": "múue", "th": "มื้อ", "tone": "high"}, {"n": 40, "en": "teacher", "rom": "khruu", "th": "ครู", "tone": "flat"}, {"n": 41, "en": "axe", "rom": "khwǎan", "th": "ขวาน", "tone": "rising"}, {"n": 42, "en": "at all / altogether (particle)", "rom": "loei", "th": "เลย", "tone": "flat"}, {"n": 43, "en": "hill / mound", "rom": "nern", "th": "เนิน", "tone": "flat"}, {"n": 44, "en": "sour", "rom": "bprîao", "th": "เปรี้ยว", "tone": "falling"}, {"n": 45, "en": "banana", "rom": "glûay", "th": "กล้วย", "tone": "falling"}, {"n": 46, "en": "similar / alike", "rom": "khláai", "th": "คล้าย", "tone": "high"}, {"n": 47, "en": "tear down / demolish", "rom": "rúue", "th": "รื้อ", "tone": "high"}, {"n": 48, "en": "nail (finger/toe)", "rom": "lép", "th": "เล็บ", "tone": "high"}, {"n": 49, "en": "adjust / fine (penalty)", "rom": "bpràp", "th": "ปรับ", "tone": "low"}, {"n": 50, "en": "spirit / morale", "rom": "khwǎn", "th": "ขวัญ", "tone": "rising"}, {"n": 51, "en": "city / town", "rom": "meuang", "th": "เมือง", "tone": "flat"}, {"n": 52, "en": "cool / evening", "rom": "yen", "th": "เย็น", "tone": "flat"}, {"n": 53, "en": "round / circular", "rom": "glom", "th": "กลม", "tone": "flat"}, {"n": 54, "en": "May I…?", "rom": "khǒr … dâi mái", "th": "ขอ…ได้ไหม", "tone": "rising · falling · high"}, {"n": 55, "en": "dry", "rom": "hâaeng", "th": "แห้ง", "tone": "falling"}, {"n": 56, "en": "skinny", "rom": "phǒm", "th": "ผอม", "tone": "rising"}, {"n": 57, "en": "twin", "rom": "fǎa-bpàaet", "th": "ฝาแฝด", "tone": "rising + low"}, {"n": 58, "en": "born", "rom": "gèrt", "th": "เกิด", "tone": "low"}, {"n": 59, "en": "confused", "rom": "ngong", "th": "งง", "tone": "flat"}, {"n": 60, "en": "hard (difficult)", "rom": "yâak", "th": "ยาก", "tone": "falling"}, {"n": 61, "en": "same room", "rom": "hông dieow gan", "th": "ห้องเดียวกัน", "tone": "falling · flat · flat"}, {"n": 62, "en": "uncle", "rom": "lung", "th": "ลุง", "tone": "flat"}, {"n": 63, "en": "movie theater", "rom": "rohng nǎng", "th": "โรงหนัง", "tone": "flat + rising"}, {"n": 64, "en": "hospital", "rom": "rohng phá-yaa-baan", "th": "โรงพยาบาล", "tone": "flat + high + flat + flat"}, {"n": 65, "en": "other", "rom": "èun", "th": "อื่น", "tone": "low"}, {"n": 66, "en": "homework", "rom": "gaan-bâan", "th": "การบ้าน", "tone": "flat + falling"}, {"n": 67, "en": "to check", "rom": "dtrùuat", "th": "ตรวจ", "tone": "low"}, {"n": 68, "en": "to wake up", "rom": "dtèun", "th": "ตื่น", "tone": "low"}, {"n": 69, "en": "to push", "rom": "phlàk", "th": "ผลัก", "tone": "low"}, {"n": 70, "en": "to turn over", "rom": "phlík", "th": "พลิก", "tone": "high"}, {"n": 71, "en": "get arrested", "rom": "thùuk jàp", "th": "ถูกจับ", "tone": "low · low"}, {"n": 72, "en": "turn around", "rom": "hǎn glàb", "th": "หันกลับ", "tone": "rising · low"}, {"n": 73, "en": "swollen", "rom": "buam", "th": "บวม", "tone": "flat"}, {"n": 74, "en": "police", "rom": "dtam-rùuat", "th": "ตำรวจ", "tone": "flat · low"}, {"n": 75, "en": "bow deeply / prostrate (in respect)", "rom": "gràap", "th": "กราบ", "tone": "low"}, {"n": 76, "en": "indifferent / leave alone / ignore", "rom": "chěoi", "th": "เฉย", "tone": "rising"}, {"n": 77, "en": "termite", "rom": "bplùak", "th": "ปลวก", "tone": "low"}, {"n": 78, "en": "wipe / wipe dry", "rom": "chét", "th": "เช็ด", "tone": "high"}, {"n": 79, "en": "poke out / appear / show up", "rom": "phlò", "th": "โผล่", "tone": "low"}, {"n": 80, "en": "smoke", "rom": "khwan", "th": "ควัน", "tone": "flat"}, {"n": 81, "en": "love", "rom": "rák", "th": "รัก", "tone": "high"}, {"n": 82, "en": "cling / hang on / drag out", "rom": "yúue", "th": "ยื้อ", "tone": "high"}, {"n": 83, "en": "change / switch", "rom": "bplìan", "th": "เปลี่ยน", "tone": "low"}, {"n": 84, "en": "person / people", "rom": "khon", "th": "คน", "tone": "flat"}, {"n": 85, "en": "mock / taunt", "rom": "yéei", "th": "เย้ย", "tone": "high"}, {"n": 86, "en": "hard / firm / stiff", "rom": "khǎeng", "th": "แข็ง", "tone": "rising"}, {"n": 87, "en": "build / create", "rom": "sâang", "th": "สร้าง", "tone": "falling"}, {"n": 88, "en": "name", "rom": "chêuu", "th": "ชื่อ", "tone": "falling"}, {"n": 89, "en": "sway / rock; Thai verse form", "rom": "khloong", "th": "โคลง", "tone": "flat"}, {"n": 90, "en": "collapse / sink / decline", "rom": "sút", "th": "ทรุด", "tone": "high"}, {"n": 91, "en": "true / real / really", "rom": "jing", "th": "จริง", "tone": "flat"}, {"n": 92, "en": "polite particle (male) / yes", "rom": "khráp", "th": "ครับ", "tone": "high"}, {"n": 93, "en": "month / moon", "rom": "deuan", "th": "เดือน", "tone": "flat"}, {"n": 94, "en": "fire / blaze (literary)", "rom": "phleeng", "th": "เพลิง", "tone": "flat"}, {"n": 95, "en": "finished / done", "rom": "sèt", "th": "เสร็จ", "tone": "low"}, {"n": 96, "en": "fill in / pile up / landfill", "rom": "thǒm", "th": "ถม", "tone": "rising"}];
+const RANGES=[["1–24",1,24],["25–48",25,48],["49–72",49,72],["73–96",73,96],["All",1,96]];
+const KEY="mw-thai-vocab-mc-v1";
+const STOP=new Set(["to","a","an","the","also","in","of","get","up","out","on"]);
+const toks=g=>new Set(g.toLowerCase().replace(/\(.*?\)/g," ").replace(/[^a-z ]/g," ").split(/\s+/).filter(w=>w&&!STOP.has(w)));
+const similar=(a,b)=>{if(a.toLowerCase()===b.toLowerCase())return true;const A=toks(a),B=toks(b);for(const w of A)if(B.has(w))return true;return false};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const byN=n=>DATA.find(d=>d.n===n);
+function buildOptions(n){const w=byN(n),picks=[w.en];for(const d of shuffle(DATA)){if(picks.length===4)break;if(d.n===n)continue;if(picks.some(p=>similar(p,d.en)))continue;picks.push(d.en)}return shuffle(picks)}
+window.__test={DATA,buildOptions};
+let S;
+function fresh(r,list){const [,a,b]=RANGES[r];const ns=list||DATA.filter(d=>d.n>=a&&d.n<=b).map(d=>d.n);return{r,queue:shuffle(ns),total:ns.length,done:[],correct:0,missed:[],cur:null}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.queue))return s}catch(e){}return null}
+const $=id=>document.getElementById(id);
+function renderFilters(){$("filters").innerHTML="";RANGES.forEach((x,i)=>{const b=document.createElement("button");b.className="btn sm mw-hover"+(S.r===i?" on":"");b.textContent=x[0];b.onclick=()=>{S=fresh(i);save();render()};$("filters").appendChild(b)})}
+const ICON={ok:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M4 12.5l5 5L20 6.5"/></svg>',bad:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg>'};
+function render(){renderFilters();
+ const ans=S.done.length;$("prog").textContent=`${ans}/${S.total}`;$("score").textContent=`${S.correct} correct`;$("barf").style.width=(S.total?ans/S.total*100:0)+"%";
+ if(!S.queue.length&&!S.cur){$("quiz").classList.add("hide");$("done").classList.remove("hide");
+  $("sum").textContent=`${S.correct} of ${S.total} right on the first try.`;const m=S.missed.map(byN);$("missWrap").classList.toggle("hide",!m.length);$("retry").classList.toggle("hide",!m.length);
+  $("missList").innerHTML=m.map(d=>`<li><b>${d.rom}</b><span class="t" lang="th">${d.th}</span><span class="e">${d.en}</span></li>`).join("");return}
+ $("quiz").classList.remove("hide");$("done").classList.add("hide");
+ if(!S.cur){const n=S.queue[0];S.cur={n,opts:buildOptions(n),pick:null,rev:S.missed.includes(n)};save()}
+ const w=byN(S.cur.n);$("num").textContent="#"+w.n+(S.cur.rev?" · Review":"");$("rom").textContent=w.rom;$("thai").textContent=w.th;$("tone").textContent=w.tone;
+ $("opts").innerHTML="";S.cur.opts.forEach((o,i)=>{const b=document.createElement("button");b.className="btn opt mw-hover";b.innerHTML=`<span class="k">${i+1}</span><span>${o}</span>`;
+  if(S.cur.pick!==null){b.disabled=true;if(o===w.en){b.classList.add("ok");b.insertAdjacentHTML("beforeend",ICON.ok)}else if(i===S.cur.pick){b.classList.add("bad");b.insertAdjacentHTML("beforeend",ICON.bad)}else b.classList.add("dim")}
+  b.onclick=()=>pick(i);$("opts").appendChild(b)});
+ const answered=S.cur.pick!==null,right=answered&&S.cur.opts[S.cur.pick]===w.en;
+ $("fb").innerHTML=answered?(right?"✓ Correct":`✗ It means “${w.en}”`):"";$("next").classList.toggle("hide",!answered)}
+function pick(i){if(!S.cur||S.cur.pick!==null)return;S.cur.pick=i;const n=S.cur.n,w=byN(n),right=S.cur.opts[i]===w.en,first=!S.missed.includes(n);
+ S.queue.shift();if(right){S.done.push(n);if(first)S.correct++}else{if(first)S.missed.push(n);S.queue.splice(Math.min(S.queue.length,4+(Math.random()*4|0)),0,n)}
+ save();render();$("next").focus()}
+function next(){if(!S.cur||S.cur.pick===null)return;S.cur=null;save();render()}
+$("next").onclick=next;$("newr").onclick=()=>{S=fresh(S.r);save();render()};
+$("retry").onclick=()=>{const m=S.missed.slice();S=fresh(S.r,m);save();render()};
+$("reset").onclick=()=>{if(confirm("Reset all progress?")){localStorage.removeItem(KEY);S=fresh(4);save();render()}};
+document.addEventListener("keydown",e=>{if(e.metaKey||e.ctrlKey||e.altKey)return;if(/^[1-4]$/.test(e.key)&&S.cur&&S.cur.pick===null){e.preventDefault();pick(+e.key-1)}else if(e.key==="Enter"&&S.cur&&S.cur.pick!==null){e.preventDefault();next()}});
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800)}
+$("share").onclick=async()=>{const url=location.href,text=`Thai Vocab Quiz (${RANGES[S.r][0]}): ${S.done.length}/${S.total} done, ${S.correct} correct first try, ${S.missed.length} missed.`;
+ if(navigator.share){try{await navigator.share({title:"Thai Vocab Quiz",text,url});return}catch(e){if(e.name==="AbortError")return}}
+ const msg=text+" "+url;try{await navigator.clipboard.writeText(msg);toast("Copied")}catch(e){if(/iPhone|Android|iPad/i.test(navigator.userAgent))location.href="sms:?&body="+encodeURIComponent(msg);else prompt("Copy this link:",msg)}};
+S=load()||fresh(4);if(S.cur&&!byN(S.cur.n))S=fresh(4);render();
+</script></body></html>
