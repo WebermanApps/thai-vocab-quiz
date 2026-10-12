@@ -11,6 +11,7 @@
 --ok:#eef3ee;--bad:#f6eeee;color-scheme:light}
 .sayrow{display:flex;align-items:center;justify-content:center;gap:12px}
 .say{width:44px;height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--mw-primary);border-radius:0;background:#fff;color:var(--mw-primary);cursor:pointer;padding:0}
+.say.slow{font-size:20px;filter:grayscale(1);width:36px;height:36px;min-width:36px;margin-left:-6px}.cardrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px}.cardrow .auto{margin-top:0}.btn.skip{min-height:36px;padding:6px 14px;font-size:12px}
 .say svg{width:22px;height:22px}.say.playing{background:var(--mw-primary);color:var(--mw-primary-foreground)}
 .auto{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mw-muted-text);text-transform:uppercase;letter-spacing:var(--mw-tracking-label);margin-top:10px;cursor:pointer}
 .anote{font-size:12px;color:var(--mw-muted-text);margin-top:6px}
@@ -63,13 +64,13 @@ footer a{color:var(--mw-muted-text);text-decoration:none;border-bottom:1px solid
 <div class="stats"><span id="prog"></span><span id="score"></span></div>
 <div class="bar"><i id="barf"></i></div>
 <section id="quiz">
- <div class="card"><div class="num" id="num"></div><div class="sayrow"><div><div class="rom" id="rom"></div><div class="thai" id="thai" lang="th"></div></div><button class="say mw-hover" id="say" type="button" aria-label="Play Thai Pronunciation" title="Play (S or Space)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></button></div><div class="tone" id="tone"></div><label class="auto"><input type="checkbox" id="autoplay"> Auto-play</label><div class="anote hide" id="anote">Audio not available on this device.</div></div>
+ <div class="card"><div class="num" id="num"></div><div class="sayrow"><div><div class="rom" id="rom"></div><div class="thai" id="thai" lang="th"></div></div><button class="say mw-hover" id="say" type="button" aria-label="Play Thai Pronunciation" title="Play (S or Space)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></button><button class="say slow mw-hover" id="slow" type="button" aria-label="Play Slowly" title="Play Slowly">🐢</button></div><div class="tone" id="tone"></div><div class="cardrow"><label class="auto"><input type="checkbox" id="autoplay"> Auto-play</label><button class="btn skip mw-hover" id="skip" type="button" aria-label="Skip Word" title="Skip (K)">Skip</button></div><div class="anote hide" id="anote">Audio not available on this device.</div></div>
  <div class="opts" id="opts"></div>
  <div class="fb" id="fb" aria-live="polite"></div>
  <button class="btn solid next mw-hover hide" id="next">Next ↵</button>
 </section>
 <section id="done" class="hide">
- <h2>Round Complete</h2><p id="sum"></p><div id="missWrap"><h2 style="font-size:22px">Missed Words</h2><ul class="miss" id="missList"></ul></div>
+ <h2>Round Complete</h2><p id="sum"></p><div id="missWrap"><h2 style="font-size:22px">Missed Words</h2><ul class="miss" id="missList"></ul></div><div id="skipWrap" class="hide"><h2 style="font-size:22px">Skipped Words</h2><ul class="miss" id="skipList"></ul></div>
  <div class="row"><button class="btn mw-hover" id="retry">Retry Missed</button><button class="btn solid mw-hover" id="newr">New Round</button></div>
 </section>
 <div style="text-align:center;margin-top:10px"><button class="reset" id="reset">Reset Progress</button></div>
@@ -98,7 +99,7 @@ function render(){renderFilters();
  const ans=S.done.length;$("prog").textContent=`${ans}/${S.total}`;$("score").textContent=`${S.correct} correct`;$("barf").style.width=(S.total?ans/S.total*100:0)+"%";
  if(!S.queue.length&&!S.cur){$("quiz").classList.add("hide");$("done").classList.remove("hide");
   $("sum").textContent=`${S.correct} of ${S.total} right on the first try.`;const m=S.missed.map(byN);$("missWrap").classList.toggle("hide",!m.length);$("retry").classList.toggle("hide",!m.length);
-  $("missList").innerHTML=m.map(d=>`<li><b>${d.rom}</b><span class="t" lang="th">${d.th}</span><span class="e">${d.en}</span></li>`).join("");return}
+  $("missList").innerHTML=m.map(d=>`<li><b>${d.rom}</b><span class="t" lang="th">${d.th}</span><span class="e">${d.en}</span></li>`).join("");const sk=(S.skipped||[]).map(byN);$("skipWrap").classList.toggle("hide",!sk.length);$("skipList").innerHTML=sk.map(d=>`<li><b>${d.rom}</b><span class="t" lang="th">${d.th}</span><span class="e">${d.en}</span></li>`).join("");return}
  $("quiz").classList.remove("hide");$("done").classList.add("hide");
  if(!S.cur){const n=S.queue[0];S.cur={n,opts:buildOptions(n),pick:null,rev:S.missed.includes(n)};save()}
  const w=byN(S.cur.n);$("num").textContent="#"+w.n+(S.cur.rev?" · Review":"");$("rom").textContent=w.rom;$("thai").textContent=w.th;$("tone").textContent=w.tone;
@@ -121,22 +122,33 @@ $("share").onclick=async()=>{const url=location.href,text=`Thai Vocab Quiz (${RA
  const msg=text+" "+url;try{await navigator.clipboard.writeText(msg);toast("Copied")}catch(e){if(/iPhone|Android|iPad/i.test(navigator.userAgent))location.href="sms:?&body="+encodeURIComponent(msg);else prompt("Copy this link:",msg)}};
 S=load()||fresh(4);if(S.cur&&!byN(S.cur.n))S=fresh(4);render();
 
-/* Audio: Web Speech th-TH, fallback Google Translate TTS */
-const AUD={voice:null,el:new Audio(),key:"mw-thai-autoplay"};
-function pickVoice(){if(!("speechSynthesis" in window))return;const v=speechSynthesis.getVoices();AUD.voice=v.find(x=>/^th[-_]TH/i.test(x.lang))||v.find(x=>/^th/i.test(x.lang))||null}
+/* Audio: best Thai voice (Web Speech), Google TTS fallback (no CORS, so no Web Audio boost) */
+const AUD={voice:null,score:-9,el:new Audio(),key:"mw-thai-autoplay",last:{n:null,t:0}};
+function vScore(x){const n=x.name||"";let s=0;if(/google/i.test(n))s+=4;if(/enhanced|premium|neural|natural|online/i.test(n))s+=4;if(x.localService===false)s+=2;if(/kanya|narisa/i.test(n))s+=1;if(/compact|espeak/i.test(n))s-=5;return s}
+function pickVoice(){if(!("speechSynthesis" in window))return;const v=speechSynthesis.getVoices().filter(x=>/^th/i.test(x.lang));v.sort((p,q)=>vScore(q)-vScore(p));AUD.voice=v[0]||null;AUD.score=v[0]?vScore(v[0]):-9}
 if("speechSynthesis" in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
 function sayText(){const w=S.cur&&byN(S.cur.n);return w?w.th.replace(/…/g," ").replace(/\s+/g," ").trim():""}
-function audioFail(){$("anote").classList.remove("hide");$("say").classList.remove("playing")}
-function playFallback(t){const a=AUD.el;a.onended=()=>$("say").classList.remove("playing");a.onerror=audioFail;a.src="https://translate.google.com/translate_tts?ie=UTF-8&tl=th&client=tw-ob&q="+encodeURIComponent(t);const p=a.play();if(p&&p.catch)p.catch(audioFail)}
-function speak(){const t=sayText();if(!t)return;$("anote").classList.add("hide");$("say").classList.add("playing");
- if("speechSynthesis" in window&&!AUD.voice)pickVoice();
- if("speechSynthesis" in window&&AUD.voice){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="th-TH";try{u.voice=AUD.voice}catch(_){}u.rate=.8;let fell=false;
-  u.onend=()=>$("say").classList.remove("playing");u.onerror=e=>{if(e.error==="interrupted"||e.error==="canceled"||fell)return;fell=true;playFallback(t)};speechSynthesis.speak(u);return}catch(e){}}
- playFallback(t)}
-$("say").onclick=speak;
+function doneUI(){$("say").classList.remove("playing");$("slow").classList.remove("playing")}
+function audioFail(){$("anote").classList.remove("hide");doneUI()}
+function ttsURL(t){return "https://translate.google.com/translate_tts?ie=UTF-8&tl=th&client=tw-ob&q="+encodeURIComponent(t)}
+function plainAudio(t,rate,onfail){const a=AUD.el;a.volume=1;a.defaultPlaybackRate=a.playbackRate=rate<.7?.75:1;a.onended=doneUI;a.onerror=onfail;a.src=ttsURL(t);a.playbackRate=a.defaultPlaybackRate;const p=a.play();if(p&&p.catch)p.catch(onfail)}
+function speakVoice(t,rate,onfail){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="th-TH";try{u.voice=AUD.voice}catch(_){}u.rate=rate;u.volume=1;let fell=false;
+  u.onend=doneUI;u.onerror=e=>{if(e.error==="interrupted"||e.error==="canceled"||fell)return;fell=true;onfail()};speechSynthesis.speak(u);return true}catch(e){return false}}
+function speak(slow){const t=sayText();if(!t)return;const n=S.cur.n,now=Date.now();
+ if(slow!==true&&AUD.last.n===n&&now-AUD.last.t<4000)slow=true; /* tap again = slow */
+ AUD.last={n,t:now};const rate=slow===true?.5:.7;$("anote").classList.add("hide");$(slow===true?"slow":"say").classList.add("playing");
+ if("speechSynthesis" in window&&!AUD.voice)pickVoice();const hasV="speechSynthesis" in window&&AUD.voice;
+ if(hasV&&AUD.score>0){if(!speakVoice(t,rate,()=>plainAudio(t,rate,audioFail)))plainAudio(t,rate,audioFail);return}
+ /* no voice or only a low-quality one: Google TTS first, device voice as backup */
+ plainAudio(t,rate,()=>{if(hasV&&speakVoice(t,rate,audioFail))return;audioFail()})}
+$("say").onclick=()=>speak();$("slow").onclick=()=>speak(true);
+/* Skip */
+function skip(){if(!S.cur||S.cur.pick!==null)return;const n=S.cur.n;S.skipped=S.skipped||[];if(!S.skipped.includes(n))S.skipped.push(n);S.queue.shift();
+ if(S.queue.length)S.queue.splice(Math.min(S.queue.length,4+(Math.random()*4|0)),0,n);else S.queue.push(n);S.cur=null;save();render();if($("autoplay").checked&&S.cur)speak()}
+$("skip").onclick=skip;
 $("autoplay").checked=(()=>{try{return localStorage.getItem(AUD.key)==="1"}catch(e){return false}})();
 $("autoplay").onchange=e=>{try{localStorage.setItem(AUD.key,e.target.checked?"1":"0")}catch(_){}};
 const _next=next;next=function(){_next();if($("autoplay").checked&&S.cur)speak()};
 $("next").onclick=()=>next();
-document.addEventListener("keydown",e=>{if(e.metaKey||e.ctrlKey||e.altKey)return;if((e.key==="s"||e.key==="S"||e.key===" ")&&S.cur&&!/INPUT|TEXTAREA/.test(e.target.tagName)){e.preventDefault();speak()}});
+document.addEventListener("keydown",e=>{if(e.metaKey||e.ctrlKey||e.altKey)return;if((e.key==="s"||e.key==="S"||e.key===" ")&&S.cur&&!/INPUT|TEXTAREA/.test(e.target.tagName)){e.preventDefault();speak()}else if((e.key==="k"||e.key==="K")&&S.cur){e.preventDefault();skip()}});
 </script></body></html>
