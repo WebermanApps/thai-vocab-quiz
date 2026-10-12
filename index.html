@@ -15,6 +15,17 @@
 .say svg{width:22px;height:22px}.say.playing{background:var(--mw-primary);color:var(--mw-primary-foreground)}
 .auto{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mw-muted-text);text-transform:uppercase;letter-spacing:var(--mw-tracking-label);margin-top:10px;cursor:pointer}
 .anote{font-size:12px;color:var(--mw-muted-text);margin-top:6px}
+.kbar{margin:-4px 0 12px}.kbar .btn{width:100%}
+.khead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.khead h2{font-size:26px}.khead .btn.sm,.kstat .btn.sm{flex:0 0 auto}
+.kstat{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;color:var(--mw-muted-text);padding:8px 0;border-bottom:2px solid var(--mw-primary);position:sticky;top:0;background:var(--mw-background);z-index:2}
+.klist{list-style:none;padding:0;margin:0}
+.klist li{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--mw-border)}
+.klist .kw{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;min-width:0}.klist .kn{font-size:12px;color:var(--mw-muted-text)}.klist b{font-weight:600}
+.klist .kt{font-family:var(--thai);font-size:24px}.klist .ke{grid-column:1/2;color:var(--mw-muted-text);font-size:15px}
+.klist .say{width:40px;height:40px;min-width:40px;grid-row:1/2;grid-column:2/3}
+.kchk{grid-column:1/3;display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;min-height:36px}.kchk input{width:22px;height:22px;accent-color:#0a0a0a;margin:0}
+.klist li.on{background:linear-gradient(90deg,var(--mw-secondary),transparent)}
+.ksub{position:sticky;bottom:64px;display:flex;gap:8px;padding:12px 0;background:var(--mw-background)}.ksub .btn{flex:1;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 .mw-hover{transition:transform var(--mw-dur) var(--mw-ease),box-shadow var(--mw-dur) var(--mw-ease),background-color var(--mw-dur) var(--mw-ease),color var(--mw-dur) var(--mw-ease)}
 .mw-hover:hover,.mw-hover:focus-visible{transform:translateY(-1px) scale(1.03);box-shadow:0 6px 18px rgba(10,10,10,.12)}
 .mw-hover:active{transform:scale(.98)}
@@ -61,6 +72,7 @@ footer a{color:var(--mw-muted-text);text-decoration:none;border-bottom:1px solid
 <div class="wrap">
 <header><h1>Thai Vocab Quiz</h1><span class="wm">MAX WEBERMAN</span></header>
 <div class="filters" id="filters"></div>
+<div class="kbar"><button class="btn mw-hover" id="kopen" type="button">Mark Known Words</button></div>
 <div class="stats"><span id="prog"></span><span id="score"></span></div>
 <div class="bar"><i id="barf"></i></div>
 <section id="quiz">
@@ -68,6 +80,12 @@ footer a{color:var(--mw-muted-text);text-decoration:none;border-bottom:1px solid
  <div class="opts" id="opts"></div>
  <div class="fb" id="fb" aria-live="polite"></div>
  <button class="btn solid next mw-hover hide" id="next">Next ↵</button>
+</section>
+<section id="known" class="hide">
+ <div class="khead"><h2>Mark Known Words</h2><button class="btn sm mw-hover" id="kclose" type="button">Back To Quiz</button></div>
+ <div class="kstat"><span id="kcount">0 of 96 known</span><button class="btn sm mw-hover" id="knone" type="button">Select None</button></div>
+ <ul class="klist" id="klist"></ul>
+ <div class="ksub"><button class="btn solid mw-hover" id="ksubmit" type="button">Submit Known Words</button><a class="btn mw-hover hide" id="ksms" href="#">Send By SMS</a></div>
 </section>
 <section id="done" class="hide">
  <h2>Round Complete</h2><p id="sum"></p><div id="missWrap"><h2 style="font-size:22px">Missed Words</h2><ul class="miss" id="missList"></ul></div><div id="skipWrap" class="hide"><h2 style="font-size:22px">Skipped Words</h2><ul class="miss" id="skipList"></ul></div>
@@ -134,7 +152,7 @@ function ttsURL(t){return "https://translate.google.com/translate_tts?ie=UTF-8&t
 function plainAudio(t,rate,onfail){const a=AUD.el;a.volume=1;a.defaultPlaybackRate=a.playbackRate=rate<.7?.75:1;a.onended=doneUI;a.onerror=onfail;a.src=ttsURL(t);a.playbackRate=a.defaultPlaybackRate;const p=a.play();if(p&&p.catch)p.catch(onfail)}
 function speakVoice(t,rate,onfail){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="th-TH";try{u.voice=AUD.voice}catch(_){}u.rate=rate;u.volume=1;let fell=false;
   u.onend=doneUI;u.onerror=e=>{if(e.error==="interrupted"||e.error==="canceled"||fell)return;fell=true;onfail()};speechSynthesis.speak(u);return true}catch(e){return false}}
-function speak(slow){const t=sayText();if(!t)return;const n=S.cur.n,now=Date.now();
+function speak(slow,txt){const t=txt?txt.replace(/…/g," ").replace(/\s+/g," ").trim():sayText();if(!t)return;const n=txt?"k:"+t:S.cur.n,now=Date.now();
  if(slow!==true&&AUD.last.n===n&&now-AUD.last.t<4000)slow=true; /* tap again = slow */
  AUD.last={n,t:now};const rate=slow===true?.5:.7;$("anote").classList.add("hide");$(slow===true?"slow":"say").classList.add("playing");
  if("speechSynthesis" in window&&!AUD.voice)pickVoice();const hasV="speechSynthesis" in window&&AUD.voice;
@@ -151,4 +169,21 @@ $("autoplay").onchange=e=>{try{localStorage.setItem(AUD.key,e.target.checked?"1"
 const _next=next;next=function(){_next();if($("autoplay").checked&&S.cur)speak()};
 $("next").onclick=()=>next();
 document.addEventListener("keydown",e=>{if(e.metaKey||e.ctrlKey||e.altKey)return;if((e.key==="s"||e.key==="S"||e.key===" ")&&S.cur&&!/INPUT|TEXTAREA/.test(e.target.tagName)){e.preventDefault();speak()}else if((e.key==="k"||e.key==="K")&&S.cur){e.preventDefault();skip()}});
+
+/* Mark Known Words */
+const KK="mw-thai-known";let KN=(()=>{try{return new Set(JSON.parse(localStorage.getItem(KK))||[])}catch(e){return new Set()}})();
+const SPK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg>';
+function ksave(){try{localStorage.setItem(KK,JSON.stringify([...KN]))}catch(e){}$("kcount").textContent=`${KN.size} of ${DATA.length} known`}
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function kRender(){$("klist").innerHTML=DATA.map(d=>`<li class="${KN.has(d.n)?"on":""}" data-n="${d.n}"><div class="kw"><span class="kn">#${d.n}</span><b>${esc(d.rom)}</b><span class="kt" lang="th">${esc(d.th)}</span></div><button class="say mw-hover" type="button" data-say="${d.n}" aria-label="Play ${esc(d.rom)}">${SPK}</button><div class="ke">${esc(d.en)}</div><label class="kchk"><input type="checkbox" data-k="${d.n}"${KN.has(d.n)?" checked":""}> I know this 100%</label></li>`).join("");ksave()}
+$("klist").addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b)speak(false,byN(+b.dataset.say).th)});
+$("klist").addEventListener("change",e=>{const c=e.target.closest("[data-k]");if(!c)return;const n=+c.dataset.k;c.checked?KN.add(n):KN.delete(n);c.closest("li").classList.toggle("on",c.checked);ksave()});
+function kShow(on){$("known").classList.toggle("hide",!on);$("kopen").parentNode.classList.toggle("hide",on);["filters","quiz","done"].forEach(id=>$(id).classList.toggle("hide",on));document.querySelector(".stats").classList.toggle("hide",on);document.querySelector(".bar").classList.toggle("hide",on);if(on){kRender();window.scrollTo(0,0)}else render()}
+$("kopen").onclick=()=>kShow(true);$("kclose").onclick=()=>kShow(false);
+$("knone").onclick=()=>{KN.clear();kRender()};
+function kText(){const l=DATA.filter(d=>KN.has(d.n)).map(d=>`#${d.n} ${d.th} ${d.rom} (${d.en})`);return `Thai quiz, known words (${l.length}): ${l.join(", ")}`}
+$("ksubmit").onclick=async()=>{if(!KN.size){toast("Select at least one word");return}const text=kText();
+ if(navigator.share){try{await navigator.share({title:"Thai Known Words",text});return}catch(e){if(e&&e.name==="AbortError")return}}
+ let ok=false;try{await navigator.clipboard.writeText(text);ok=true}catch(e){}
+ const a=$("ksms");a.href="sms:?&body="+encodeURIComponent(text);a.classList.remove("hide");toast(ok?"Copied. Paste it or send by SMS":"Use Send By SMS")};
 </script></body></html>
