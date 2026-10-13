@@ -74,9 +74,19 @@ footer{font-size:18px}.btn{font-size:18px;min-height:56px;padding:12px 40px}}
 .warn{border:2px solid var(--mw-primary);margin:0 0 18px;background:#fff}.warn summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:10px;padding:0 16px;font-weight:600;font-size:13px;letter-spacing:var(--mw-tracking-label);text-transform:uppercase;list-style:none}.warn summary::-webkit-details-marker{display:none}.warn summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--mw-dur)}.warn[open] summary::after{transform:rotate(-135deg)}.warn summary:hover{background:var(--mw-secondary)}.warn .wb{padding:0 16px 14px;font-size:15px;line-height:1.5}
 @media(min-width:1600px){.warn summary{font-size:18px;min-height:56px}.warn .wb{font-size:22px}}
 .toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--mw-primary);padding:8px 14px;font-size:14px}
+
+/* Style picks Oct 13 (mix-dashboards) */
+:root{--lagoon:#0E7C86;--lagoon-tint:#E6F4F5}
+.navback{letter-spacing:.18em;font-size:12px;margin:-10px 0 2px}
+.report{border-color:var(--lagoon);padding:14px 18px}.report summary.rl{font-family:var(--mw-font-heading);font-size:24px;letter-spacing:0;text-transform:none;line-height:1.15;color:var(--mw-foreground)}.report summary.rl .rk{display:block;font-family:var(--mw-font-body);font-size:11px;letter-spacing:var(--mw-tracking-label);text-transform:uppercase;color:var(--lagoon)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 12px}.tile{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border:1px solid var(--lagoon);border-radius:.5rem;background:var(--lagoon-tint);color:var(--lagoon);text-decoration:none;font-size:12px;font-weight:600;text-align:center;min-height:44px}.tile svg{width:22px;height:22px}
+.tag{border-radius:999px;padding:2px 10px;border-color:var(--lagoon);color:var(--lagoon);background:var(--lagoon-tint)}
+.card.wait{padding:0;overflow:hidden}.card.wait h2{background:var(--lagoon-tint);border-left:4px solid var(--lagoon);padding:12px 16px;margin:0;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--lagoon)}.card.wait ul{padding:14px 16px}
+@media(min-width:1600px){.report summary.rl{font-size:36px}.report summary.rl .rk{font-size:16px}.tile{font-size:18px}.card.wait h2{font-size:20px;padding:16px 24px}.card.wait ul{padding:20px 24px}}
 </style><script src="../ptr.js" defer></script></head><body><div class="wrap">
 <nav aria-label="Back"><a class="navback mw-hover" href="https://webermanapps.github.io/a-2sipntzsp385oxy3/">← Apps Home</a></nav>
-<details class="report" aria-label="Fresh Start"><summary class="rl">Fresh Start · Tue Oct 13 · 4 apps ready</summary><ul>
+<details class="report" aria-label="Fresh Start"><summary class="rl"><span class="rk">Fresh Start · Tue Oct 13</span>4 apps ready</summary>
+<div class="tiles"><a class="tile mw-hover" href="https://webermanapps.github.io/thai-vocab-quiz/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 9a3 3 0 1 1 4 2.8c-.6.3-1 .9-1 1.6V15M12 18h.01"/></svg>Quiz</a><a class="tile mw-hover" href="https://webermanapps.github.io/thai-vocab-quiz/check/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l4 4L19 7"/></svg>Check</a><a class="tile mw-hover" href="https://webermanapps.github.io/thai-vocab-quiz/letters/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 20L12 4l6 16M8.5 14h7"/></svg>Letters</a><a class="tile mw-hover" href="https://webermanapps.github.io/thai-vocab-quiz/words/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Words</a></div><ul>
 <li><b>Ready now:</b> <a href="https://webermanapps.github.io/thai-vocab-quiz/">Thai Vocab Quiz</a> (94 active words, 32 in the Known Words archive), <a href="https://webermanapps.github.io/thai-vocab-quiz/check/">Vocab Check</a>, <a href="https://webermanapps.github.io/thai-vocab-quiz/letters/">Letter Flashcards</a> and <a href="https://webermanapps.github.io/thai-vocab-quiz/words/">Word Flashcards</a>, all with audio.</li>
 <li><b>Today's tip:</b> <span lang="th">เอา…ด้วย</span> ao … dûay, "I'll take … too."</li>
 <li><b>Refreshed:</b> Submit, pull-to-refresh and dashboard links checked on every app.</li>
@@ -100,7 +110,7 @@ footer{font-size:18px}.btn{font-size:18px;min-height:56px;padding:12px 40px}}
 <li><b>Daily Tip, 8:04 ICT.</b> One phrase or sentence pattern each morning.</li>
 <li><b>Oct 17, 8:23 ICT.</b> Study-focus check-in: keep sound-first, or bring in more Thai script?</li>
 <li><b>Quizzes paused</b> in chat until Max answers one on his own. The apps stay open any time.</li></ul></section>
-<section class="card"><h2>Decisions For Max</h2><ul class="l">
+<section class="card wait"><h2>Decisions For Max</h2><ul class="l">
 <li><b>Recorded audio clips?</b> If the in-app voice is still too quiet, I can make recorded clips for each word.</li>
 <li><b>Study focus (Oct 17).</b> Sound-first, or more script?</li></ul></section>
 <section class="card"><h2>Recent Work</h2><ul class="l">
