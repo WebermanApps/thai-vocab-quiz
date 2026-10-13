@@ -5,6 +5,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Khand:wght@700&family=Hind:wght@400;600&family=Noto+Sans+Thai+Looped:wght@400;600&family=Sarabun:wght@400;600&display=swap">
 <style>
+.navback{display:inline-flex;align-items:center;min-height:44px;min-width:44px;padding:0 2px;margin:-8px 0 4px;font-size:13px;font-weight:600;letter-spacing:var(--mw-tracking-label);text-transform:uppercase;color:var(--mw-primary);text-decoration:none}.navback:hover{text-decoration:underline}@media(min-width:1600px){.navback{font-size:17px;min-height:52px}}
+
 :root{--mw-background:#fff;--mw-foreground:#0a0a0a;--mw-primary:#171717;--mw-primary-foreground:#fafafa;--mw-secondary:#f5f5f5;--mw-muted-text:#737373;--mw-border:#e5e5e5;
 --mw-font-heading:"Khand","Arial Narrow",system-ui,sans-serif;--mw-font-body:"Hind",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 --thai:"Noto Sans Thai Looped","Sarabun","Thonburi","Leelawadee UI","Tahoma",sans-serif;--mw-radius:.625rem;--mw-tracking-label:.1em;--mw-ease:cubic-bezier(.2,.8,.2,1);--mw-dur:180ms;
@@ -64,6 +66,7 @@ footer{text-align:center;font-size:13px;color:var(--mw-muted-text);padding:28px 
 .sharebar{display:flex;justify-content:center;margin:28px 0 0}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--mw-primary);padding:8px 14px;font-size:14px;z-index:9}
 </style><script src="../submit.js"></script></head><body><div class="wrap">
+<nav aria-label="Back"><a class="navback mw-hover" href="https://webermanapps.github.io/thai-vocab-quiz/dashboard/">← Thai Dashboard</a></nav>
 <header><h1>Thai Vocab Check</h1><span class="wm">MAX WEBERMAN</span></header>
 <p class="sub">Answer each word once. Then tap Submit To Thai.</p>
 <div class="top"><div><b id="cOk">0</b><span>Correct</span></div><div><b id="cBad">0</b><span>Wrong</span></div><div><b id="cSk">0</b><span>Skipped</span></div><div><b id="cLeft">94</b><span>Left</span></div></div>
