@@ -37,7 +37,7 @@ body{min-height:100vh;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .mw-hover:active{transform:scale(.98)}
 @media (prefers-reduced-motion:reduce){.mw-hover,.mw-hover:hover{transition:none;transform:none}}
 *{box-sizing:border-box}html,body{margin:0;background:var(--mw-background);color:var(--mw-foreground);font-family:var(--mw-font-body);-webkit-text-size-adjust:100%}
-.wrap{max-width:640px;margin:0 auto;padding:16px 16px 90px}
+.wrap{max-width:640px;margin:0 auto;padding:16px 16px 24px}
 header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-top:8px}
 h1,h2{font-family:var(--mw-font-heading);font-weight:700;line-height:1.1;margin:0}h1{font-size:34px}h2{font-size:22px;margin:22px 0 8px}
 .wm{font-family:var(--mw-font-heading);font-weight:700;letter-spacing:var(--mw-tracking-label);font-size:13px;color:var(--mw-muted-text)}
@@ -61,6 +61,7 @@ h1,h2{font-family:var(--mw-font-heading);font-weight:700;line-height:1.1;margin:
 .reset{background:none;border:none;color:var(--mw-muted-text);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;min-height:44px}
 footer{text-align:center;font-size:13px;color:var(--mw-muted-text);padding:28px 0 12px}footer a{color:var(--mw-muted-text);text-decoration:none;border-bottom:1px solid rgba(115,115,115,.3)}
 .hide{display:none!important}
+.sharebar{display:flex;justify-content:center;margin:28px 0 0}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--mw-primary);padding:8px 14px;font-size:14px;z-index:9}
 </style></head><body><div class="wrap">
 <header><h1>Thai Vocab Check</h1><span class="wm">MAX WEBERMAN</span></header>
@@ -71,6 +72,7 @@ footer{text-align:center;font-size:13px;color:var(--mw-muted-text);padding:28px 
 <textarea class="out" id="out" readonly aria-label="Results text"></textarea>
 <div class="subrow"><button class="btn solid mw-hover" id="submit" type="button">Submit To Thai</button><a class="btn mw-hover hide" id="sms" href="#">Send By SMS</a></div>
 <div style="text-align:center;margin-top:8px"><button class="reset" id="reset" type="button">Reset Progress</button></div>
+<div class="sharebar"><button class="btn mw-hover" id="share" type="button">Share</button></div>
 <footer><a class="mw-hover" href="https://maxweberman.com" target="_blank" rel="noopener">Built by Max Weberman</a></footer>
 </div>
 <script>
@@ -115,5 +117,8 @@ $("submit").onclick=async()=>{const text=report();$("out").value=text;
  if(navigator.share){try{await navigator.share({title:"Thai Vocab Check",text});return}catch(e){if(e&&e.name==="AbortError")return}}
  let ok=false;try{await navigator.clipboard.writeText(text);ok=true}catch(e){}
  const a=$("sms");a.href="sms:?&body="+encodeURIComponent(text);a.classList.remove("hide");toast(ok?"Copied. Paste it or send by SMS":"Copy the text above or send by SMS")};
+$("share").onclick=async()=>{const url=location.href.split("?")[0],c=["cOk","cBad","cSk","cLeft"].map(i=>$(i).textContent),text=`Thai Vocab Check: ${c[0]} correct, ${c[1]} wrong, ${c[2]} skipped, ${c[3]} left.`;
+ if(navigator.share){try{await navigator.share({title:"Thai Vocab Check",text,url});return}catch(e){if(e&&e.name==="AbortError")return}}
+ try{await navigator.clipboard.writeText(text+" "+url);toast("Copied")}catch(e){location.href="sms:?&body="+encodeURIComponent(text+" "+url)}};
 $("reset").onclick=()=>{if(confirm("Reset all answers?")){S.ans={};save();DATA.forEach(d=>paint(d.n));counts()}};
 </script></body></html>

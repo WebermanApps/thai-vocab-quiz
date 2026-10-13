@@ -25,7 +25,7 @@
 .klist .say{width:40px;height:40px;min-width:40px;grid-row:1/2;grid-column:2/3}
 .kchk{grid-column:1/3;display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;min-height:36px}.kchk input{width:22px;height:22px;accent-color:#0a0a0a;margin:0}
 .klist li.on{background:linear-gradient(90deg,var(--mw-secondary),transparent)}
-.ksub{position:sticky;bottom:64px;display:flex;gap:8px;padding:12px 0;background:var(--mw-background)}.ksub .btn{flex:1;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.ksub{position:sticky;bottom:0;display:flex;gap:8px;padding:12px 0;background:var(--mw-background)}.ksub .btn{flex:1;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 .mw-hover{transition:transform var(--mw-dur) var(--mw-ease),box-shadow var(--mw-dur) var(--mw-ease),background-color var(--mw-dur) var(--mw-ease),color var(--mw-dur) var(--mw-ease)}
 .mw-hover:hover,.mw-hover:focus-visible{transform:translateY(-1px) scale(1.03);box-shadow:0 6px 18px rgba(10,10,10,.12)}
 .mw-hover:active{transform:scale(.98)}
@@ -37,7 +37,7 @@ body{min-height:100vh;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 .mw-hover:active{transform:scale(.98)}
 @media (prefers-reduced-motion:reduce){.mw-hover,.mw-hover:hover{transition:none;transform:none}}
 *{box-sizing:border-box}html,body{margin:0;background:#fff;color:var(--mw-foreground);font-family:var(--mw-font-body);-webkit-text-size-adjust:100%}
-.wrap{max-width:1040px;margin:0 auto;padding:22px 18px 110px}
+.wrap{max-width:1040px;margin:0 auto;padding:22px 18px 16px}
 header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:2px solid var(--mw-primary);padding-bottom:10px}
 h1,h2,h3{font-family:var(--mw-font-heading);font-weight:700;line-height:1.1;margin:0}h1{font-size:36px;letter-spacing:-.01em}h2{font-size:22px;margin-bottom:10px}h3{font-size:18px}
 .wm{font-family:var(--mw-font-heading);font-weight:700;letter-spacing:var(--mw-tracking-label);font-size:13px;color:var(--mw-muted-text)}
@@ -55,17 +55,17 @@ ul.l{list-style:none;padding:0;margin:0}ul.l li{padding:10px 0;border-top:1px so
 .tag{display:inline-block;font-size:11px;letter-spacing:var(--mw-tracking-label);text-transform:uppercase;border:1px solid var(--mw-primary);padding:1px 6px;margin-right:6px;font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:8px}.chip{background:var(--mw-secondary);padding:6px 10px;font-size:14px;border-radius:.5rem}
 footer{text-align:center;font-size:13px;color:var(--mw-muted-text);padding:30px 0 12px}footer a{color:var(--mw-muted-text);text-decoration:none;display:inline-flex;align-items:center;min-height:44px;padding:0 6px;background:linear-gradient(rgba(115,115,115,.3),rgba(115,115,115,.3)) no-repeat center bottom 10px/calc(100% - 12px) 1px}
-.sharebar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);border-top:1px solid var(--mw-border);padding:10px 18px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center}
+.sharebar{display:flex;justify-content:center;gap:8px;margin:28px 0 0}
 .btn{font-family:var(--mw-font-body);font-weight:600;text-transform:uppercase;letter-spacing:var(--mw-tracking-label);font-size:13px;min-height:44px;padding:10px 28px;border:2px solid var(--mw-primary);border-radius:0;background:#fff;color:var(--mw-primary);cursor:pointer}
 .stat .label{display:block;line-height:1.3;margin-top:6px}.wm{white-space:nowrap}
-@media(min-width:1400px){.wrap{max-width:1360px;padding:32px 40px 120px}.grid{grid-template-columns:repeat(3,1fr)}.span2{grid-column:auto}.span3{grid-column:1/-1}.apps{grid-template-columns:repeat(4,1fr)}.tips{columns:2;column-gap:32px}.tips li{break-inside:avoid;border-top:1px solid var(--mw-border)!important;padding-top:10px!important}}
+@media(min-width:1400px){.wrap{max-width:1360px;padding:32px 40px 24px}.grid{grid-template-columns:repeat(3,1fr)}.span2{grid-column:auto}.span3{grid-column:1/-1}.apps{grid-template-columns:repeat(4,1fr)}.tips{columns:2;column-gap:32px}.tips li{break-inside:avoid;border-top:1px solid var(--mw-border)!important;padding-top:10px!important}}
 @media(min-width:1400px){.tipcard{grid-column:2/4}}
 @media(min-width:2000px){.wrap{max-width:1760px}html{font-size:17px}body{font-size:17px}h1{font-size:48px}h2{font-size:26px}.stat b{font-size:48px}ul.l li{font-size:17px}.app .d{font-size:16px}.app .t{font-size:24px}}
 .toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--mw-primary);padding:8px 14px;font-size:14px}
 </style></head><body><div class="wrap">
 <header><h1>Thai Command Center</h1><span class="wm">MAX WEBERMAN</span></header>
 <p class="lede">Max's Thai study partner: vocab, tones, phrase patterns and study apps. Meaning and sound first, script second.</p>
-<p class="label" style="margin-top:6px">Updated Oct 13, 2026 · 12:45 ICT</p>
+<p class="label" style="margin-top:6px">Updated Oct 13, 2026 · 14:45 ICT</p>
 <div class="stats"><div class="stat"><b>94</b><span class="label">Active Words</span></div><div class="stat"><b>32</b><span class="label">Known (Archived)</span></div><div class="stat"><b>12</b><span class="label">Tip Patterns</span></div></div>
 <div class="grid">
 <section class="card span2 span3"><h2>Study Apps</h2><div class="apps">
@@ -95,9 +95,9 @@ footer{text-align:center;font-size:13px;color:var(--mw-muted-text);padding:30px 
 <li><b>Oct 11</b> · Thai Vocab Quiz launched.</li></ul></section>
 <section class="card span2 tipcard"><h2>Daily Tip Patterns So Far</h2><ul class="l tips"><li><span class="th" lang="th">มี…ไหม</span> · <b>mii … mǎi</b> · do you have …?</li><li><span class="th" lang="th">อยู่ที่ไหน</span> · <b>yùu thîi-nǎi</b> · where is …?</li><li><span class="th" lang="th">จะ</span> · <b>jà</b> · will / going to</li><li><span class="th" lang="th">กำลัง</span> · <b>gam-lang</b> · in the middle of …</li><li><span class="th" lang="th">เคย</span> · <b>khoey</b> · have ever …</li><li><span class="th" lang="th">หรือยัง / แล้ว</span> · <b>rǔe yang / láew</b> · yet? / already</li><li><span class="th" lang="th">อยาก</span> · <b>yàak</b> · want to …</li><li><span class="th" lang="th">ได้ไหม</span> · <b>dâi mái</b> · can …? / is it OK?</li><li><span class="th" lang="th">ขอ</span> · <b>khǒr</b> · may I have …</li><li><span class="th" lang="th">หน่อย</span> · <b>nòi</b> · softener: a little, please</li><li><span class="th" lang="th">ช่วย…หน่อย</span> · <b>chûay … nòi</b> · please help / could you …</li><li><span class="th" lang="th">กัน</span> · <b>gan</b> · let's …</li></ul></section>
 </div>
+<div class="sharebar"><button class="btn mw-hover" id="share" type="button">Share</button></div>
 <footer><a class="mw-hover" href="https://maxweberman.com" target="_blank" rel="noopener">Built by Max Weberman</a></footer>
 </div>
-<div class="sharebar"><button class="btn mw-hover" id="share" type="button">Share</button></div>
 <script>
 function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800)}
 document.getElementById("share").onclick=async()=>{const url=location.href,text="Thai Command Center: 94 active words, 32 known.";
