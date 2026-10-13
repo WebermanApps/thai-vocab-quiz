@@ -25,7 +25,7 @@
 .klist .say{width:40px;height:40px;min-width:40px;grid-row:1/2;grid-column:2/3}
 .kchk{grid-column:1/3;display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;min-height:36px}.kchk input{width:22px;height:22px;accent-color:#0a0a0a;margin:0}
 .klist li.on{background:linear-gradient(90deg,var(--mw-secondary),transparent)}
-.ksub{position:sticky;bottom:0;display:flex;gap:8px;padding:12px 0;background:var(--mw-background)}.ksub .btn{flex:1;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.ksub{position:sticky;bottom:0;display:flex;flex-wrap:wrap;gap:8px;padding:10px 0;background:var(--mw-background)}#ksubmitBox{flex:1 1 100%}#ksubmitBox .mws-wrap{max-width:none;margin:0}.ksub .btn{flex:1;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 .mw-hover{transition:transform var(--mw-dur) var(--mw-ease),box-shadow var(--mw-dur) var(--mw-ease),background-color var(--mw-dur) var(--mw-ease),color var(--mw-dur) var(--mw-ease)}
 .mw-hover:hover,.mw-hover:focus-visible{transform:translateY(-1px) scale(1.03);box-shadow:0 6px 18px rgba(10,10,10,.12)}
 .mw-hover:active{transform:scale(.98)}
@@ -58,6 +58,7 @@ h1{font-size:34px}h2{font-size:28px;margin-bottom:8px}
 .opt:disabled{cursor:default}.opt:disabled:hover{transform:none;box-shadow:none}
 .fb{min-height:28px;margin:12px 0 6px;font-weight:600;text-align:center}
 .next{width:100%;min-height:52px}
+.weakline{font-size:12px;color:var(--mw-muted-text);margin:-2px 0 6px}
 .hide{display:none!important}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.row .btn{flex:1}
 .miss{list-style:none;padding:0;margin:8px 0}.miss li{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--mw-border)}
@@ -68,12 +69,12 @@ footer a{color:var(--mw-muted-text);text-decoration:none;border-bottom:1px solid
 .sharebar .btn{min-width:160px}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--mw-primary);padding:8px 14px;font-size:14px}
 .reset{background:none;border:none;color:var(--mw-muted-text);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;min-height:44px;padding:0 4px}
 @media (min-width:900px){.wrap{padding-top:36px}h1{font-size:44px}.opts{grid-template-columns:1fr 1fr}.rom{font-size:48px}.thai{font-size:50px}}
-</style></head><body>
+</style><script src="submit.js"></script></head><body>
 <div class="wrap">
 <header><h1>Thai Vocab Quiz</h1><span class="wm">MAX WEBERMAN</span></header>
 <div class="filters" id="filters"></div>
 <div class="kbar"><button class="btn mw-hover" id="kopen" type="button">Mark Known Words</button><button class="btn mw-hover" id="aopen" type="button">Known Words (<span id="acount"></span>)</button></div>
-<div class="stats"><span id="prog"></span><span id="score"></span></div>
+<div class="stats"><span id="prog"></span><span id="score"></span></div><div class="weakline hide" id="weakline"></div>
 <div class="bar"><i id="barf"></i></div>
 <section id="quiz">
  <div class="card"><div class="num" id="num"></div><div class="sayrow"><div><div class="rom" id="rom"></div><div class="thai" id="thai" lang="th"></div></div><button class="say mw-hover" id="say" type="button" aria-label="Play Thai Pronunciation" title="Play (S or Space)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></button><button class="say slow mw-hover" id="slow" type="button" aria-label="Play Slowly" title="Play Slowly">Slow</button></div><div class="tone" id="tone"></div><div class="cardrow"><label class="auto"><input type="checkbox" id="autoplay"> Auto-play</label><button class="btn skip mw-hover" id="skip" type="button" aria-label="Skip Word" title="Skip (K)">Skip</button></div><div class="anote hide" id="anote">Audio not available on this device.</div></div>
@@ -85,7 +86,7 @@ footer a{color:var(--mw-muted-text);text-decoration:none;border-bottom:1px solid
  <div class="khead"><h2>Mark Known Words</h2><button class="btn sm mw-hover" id="kclose" type="button">Back To Quiz</button></div>
  <div class="kstat"><span id="kcount">0 known</span><button class="btn sm mw-hover" id="knone" type="button">Select None</button></div>
  <ul class="klist" id="klist"></ul>
- <div class="ksub"><button class="btn solid mw-hover" id="ksubmit" type="button">Submit Known Words</button><a class="btn mw-hover hide" id="ksms" href="#">Send By SMS</a></div>
+ <div class="ksub"><div id="ksubmitBox"></div><button class="btn mw-hover" id="ksubmit" type="button">Share Or Copy</button><a class="btn mw-hover hide" id="ksms" href="#">Send By SMS</a></div>
 </section>
 <section id="arch" class="hide">
  <div class="khead"><h2>Known Words</h2><button class="btn sm mw-hover" id="aclose" type="button">Back To Quiz</button></div>
@@ -116,13 +117,18 @@ const byN=n=>DATA.find(d=>d.n===n);
 function buildOptions(n){const w=byN(n),picks=[w.en];for(const d of shuffle(DATA)){if(picks.length===4)break;if(d.n===n)continue;if(picks.some(p=>similar(p,d.en)))continue;picks.push(d.en)}for(const d of shuffle(DATA)){if(picks.length===4)break;if(!picks.some(p=>p.toLowerCase()===d.en.toLowerCase()))picks.push(d.en)}return shuffle(picks)}
 window.__test={DATA,buildOptions};
 let S;
-function fresh(r,list){const [,a,b]=RANGES[r];const ns=list||DATA.filter(d=>d.n>=a&&d.n<=b).map(d=>d.n);return{r,queue:shuffle(ns),total:ns.length,done:[],correct:0,missed:[],cur:null}}
+const GAPS=[2,5,10],WK="mw-thai-weak-v1";
+function weakAll(){try{return JSON.parse(localStorage.getItem(WK))||{}}catch(e){return{}}}
+function weakOf(n){return weakAll()[byN(n).th]||0}
+function weakAdd(n,d){const W=weakAll(),k=byN(n).th,v=Math.max(0,Math.min(9,(W[k]||0)+d));if(v)W[k]=v;else delete W[k];try{localStorage.setItem(WK,JSON.stringify(W))}catch(e){}}
+function fresh(r,list){const [,a,b]=RANGES[r];const ns=list||DATA.filter(d=>d.n>=a&&d.n<=b).map(d=>d.n);const sh=shuffle(ns),weak=sh.filter(n=>weakOf(n)>0).sort((x,y)=>weakOf(y)-weakOf(x));
+ return{r,queue:weak.concat(sh.filter(n=>!weakOf(n))),weakFirst:weak.length,total:ns.length,done:[],correct:0,missed:[],step:{},cur:null}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.queue))return s}catch(e){}return null}
 const $=id=>document.getElementById(id);
 function renderFilters(){$("filters").innerHTML="";RANGES.forEach((x,i)=>{const b=document.createElement("button");b.className="btn sm mw-hover"+(S.r===i?" on":"");b.textContent=x[0];b.onclick=()=>{S=fresh(i);save();render()};$("filters").appendChild(b)})}
 const ICON={ok:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M4 12.5l5 5L20 6.5"/></svg>',bad:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M6 6l12 12M18 6L6 18"/></svg>'};
-function render(){renderFilters();
+function render(){renderFilters();{const k=S.weakFirst||0,el=$("weakline");el.textContent=k?`${k} weak word${k>1?"s":""} from past rounds ${k>1?"come":"comes"} first. Missed words return after 2, 5, then 10 questions.`:"Missed words return after 2, 5, then 10 questions.";el.classList.toggle("hide",!k&&!(S.missed&&S.missed.length))}
  const ans=S.done.length;$("prog").textContent=`${ans}/${S.total}`;$("score").textContent=`${S.correct} correct`;$("barf").style.width=(S.total?ans/S.total*100:0)+"%";
  if(!S.queue.length&&!S.cur){$("quiz").classList.add("hide");$("done").classList.remove("hide");
   $("sum").textContent=`${S.correct} of ${S.total} right on the first try.`;const m=S.missed.map(byN);$("missWrap").classList.toggle("hide",!m.length);$("retry").classList.toggle("hide",!m.length);
@@ -136,7 +142,9 @@ function render(){renderFilters();
  const answered=S.cur.pick!==null,right=answered&&S.cur.opts[S.cur.pick]===w.en;
  $("fb").innerHTML=answered?(right?"Correct":`Wrong. It means “${w.en}”`):"";$("next").classList.toggle("hide",!answered)}
 function pick(i){if(!S.cur||S.cur.pick!==null)return;S.cur.pick=i;const n=S.cur.n,w=byN(n),right=S.cur.opts[i]===w.en,first=!S.missed.includes(n);
- S.queue.shift();if(right){S.done.push(n);if(first)S.correct++}else{if(first)S.missed.push(n);S.queue.splice(Math.min(S.queue.length,4+(Math.random()*4|0)),0,n)}
+ S.queue.shift();S.step=S.step||{};const back=g=>S.queue.splice(Math.min(S.queue.length,g),0,n);
+ if(right){if(n in S.step){if(S.step[n]>=2){delete S.step[n];S.done.push(n);weakAdd(n,-1)}else{S.step[n]++;back(GAPS[S.step[n]])}}else{S.done.push(n);if(first)S.correct++;weakAdd(n,-1)}}
+ else{if(first)S.missed.push(n);S.step[n]=0;back(GAPS[0]);weakAdd(n,2)}
  save();render();$("next").focus()}
 function next(){if(!S.cur||S.cur.pick===null)return;S.cur=null;save();render()}
 $("next").onclick=next;$("newr").onclick=()=>{S=fresh(S.r);save();render()};
@@ -203,4 +211,9 @@ $("alist").addEventListener("click",e=>{const s=e.target.closest("[data-asay]");
  try{localStorage.setItem("mw-thai-restored-v1",JSON.stringify(RESTORED))}catch(_){}toast(i<0?"Back in the quiz. Starting a fresh round.":"Archived again.");setTimeout(()=>location.reload(),900)});
 function aShow(on){$("arch").classList.toggle("hide",!on);$("kopen").parentNode.classList.toggle("hide",on);["filters","quiz","done"].forEach(id=>$(id).classList.toggle("hide",on));document.querySelector(".stats").classList.toggle("hide",on);document.querySelector(".bar").classList.toggle("hide",on);if(on){aRender();scrollTo(0,0)}else render()}
 $("aopen").onclick=()=>aShow(true);$("aclose").onclick=()=>aShow(false);aRender();
+
+const MWTEST=new URLSearchParams(location.search).has("test");
+(function(){const r=MWSubmit.button($("ksubmitBox"),{agent:"thai",app:"thai-vocab-quiz-known",deck:MWTEST?"TEST":"known-words",
+ getResults:()=>({known:DATA.filter(d=>KN.has(d.n)).map(d=>({n:d.n,th:d.th,rom:d.rom,en:d.en})),text:kText()}),
+ getNotes:()=>MWTEST?"TEST submission by Thai agent. Please ignore.":""});const b=r.el.querySelector("button");if(b.textContent==="Submit")b.textContent="Submit Known Words"})();
 </script></body></html>
