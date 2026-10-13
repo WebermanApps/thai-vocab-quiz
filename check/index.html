@@ -92,7 +92,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}save(
 function state(n){const a=S.ans[n];if(a===undefined)return"";if(a==="skip")return"sk";return S.opts[n][a]===byN(n).en?"ok":"bad"}
 function rowHTML(d){const st=state(d.n),a=S.ans[d.n],locked=st!=="";
  const ops=S.opts[d.n].map((o,i)=>`<button class="btn opt mw-hover${locked&&o===d.en&&st!=="sk"?" right":""}${locked&&a===i&&st==="bad"?" mine":""}" data-a="${i}"${locked?" disabled":""}>${esc(o)}</button>`).join("");
- const lab={ok:"✓ Correct",bad:"✗ Wrong",sk:"Skipped","":""}[st];
+ const lab={ok:"Correct",bad:"Wrong",sk:"Skipped","":""}[st];
  return `<div class="hd"><div class="w"><span class="n">#${d.n}</span><span class="rom">${esc(d.rom)}</span><span class="th" lang="th">${esc(d.th)}</span></div><button class="say mw-hover" type="button" data-say aria-label="Play ${esc(d.rom)}">${SPK}</button></div><div class="opts">${ops}</div><div class="act"><span class="st">${lab}</span>${locked?'<button class="btn sm mw-hover" data-undo type="button">Undo</button>':'<button class="btn sm mw-hover" data-skip type="button">Skip</button>'}</div>`}
 function paint(n){const li=document.querySelector(`[data-n="${n}"]`);li.className="row "+state(n);li.innerHTML=rowHTML(byN(n))}
 function counts(){let c={ok:0,bad:0,sk:0,"":0};DATA.forEach(d=>c[state(d.n)]++);$("cOk").textContent=c.ok;$("cBad").textContent=c.bad;$("cSk").textContent=c.sk;$("cLeft").textContent=c[""];$("out").value=report()}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light"><title>Thai Word Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Khand:wght@700&family=Hind:wght@400;600&family=Noto+Sans+Thai+Looped:wght@400;600&family=Sarabun:wght@400;600&display=swap">
+<style>
+:root{--mw-background:#fff;--mw-foreground:#0a0a0a;--mw-primary:#171717;--mw-primary-foreground:#fafafa;--mw-secondary:#f5f5f5;--mw-muted-text:#737373;--mw-border:#e5e5e5;
+--mw-font-heading:"Khand","Arial Narrow",system-ui,sans-serif;--mw-font-body:"Hind",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+--thai:"Noto Sans Thai Looped","Sarabun","Thonburi","Leelawadee UI","Tahoma",sans-serif;--mw-radius:.625rem;--mw-tracking-label:.1em;--mw-ease:cubic-bezier(.2,.8,.2,1);--mw-dur:180ms;
+--ok:#eef3ee;--bad:#f6eeee;color-scheme:light}
+.sayrow{display:flex;align-items:center;justify-content:center;gap:12px}
+.say{width:44px;height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--mw-primary);border-radius:0;background:#fff;color:var(--mw-primary);cursor:pointer;padding:0}
+.say.slow{font-size:20px;filter:grayscale(1);width:36px;height:36px;min-width:36px;margin-left:-6px}.cardrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px}.cardrow .auto{margin-top:0}.btn.skip{min-height:36px;padding:6px 14px;font-size:12px}
+.say svg{width:22px;height:22px}.say.playing{background:var(--mw-primary);color:var(--mw-primary-foreground)}
+.auto{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mw-muted-text);text-transform:uppercase;letter-spacing:var(--mw-tracking-label);margin-top:10px;cursor:pointer}
+.anote{font-size:12px;color:var(--mw-muted-text);margin-top:6px}
+.kbar{margin:-4px 0 12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.kbar .btn{width:100%}
+.khead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.khead h2{font-size:26px}.khead .btn.sm,.kstat .btn.sm{flex:0 0 auto}
+.kstat{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;color:var(--mw-muted-text);padding:8px 0;border-bottom:2px solid var(--mw-primary);position:sticky;top:0;background:var(--mw-background);z-index:2}
+.klist{list-style:none;padding:0;margin:0}
+.klist li{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--mw-border)}
+.klist .kw{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;min-width:0}.klist .kn{font-size:12px;color:var(--mw-muted-text)}.klist b{font-weight:600}
+.klist .kt{font-family:var(--thai);font-size:24px}.klist .ke{grid-column:1/2;color:var(--mw-muted-text);font-size:15px}
+.klist .say{width:40px;height:40px;min-width:40px;grid-row:1/2;grid-column:2/3}
+.kchk{grid-column:1/3;display:flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;min-height:36px}.kchk input{width:22px;height:22px;accent-color:#0a0a0a;margin:0}
+.klist li.on{background:linear-gradient(90deg,var(--mw-secondary),transparent)}
+.ksub{position:sticky;bottom:0;display:flex;gap:8px;padding:12px 0;background:var(--mw-background)}.ksub .btn{flex:1;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.mw-hover{transition:transform var(--mw-dur) var(--mw-ease),box-shadow var(--mw-dur) var(--mw-ease),background-color var(--mw-dur) var(--mw-ease),color var(--mw-dur) var(--mw-ease)}
+.mw-hover:hover,.mw-hover:focus-visible{transform:translateY(-1px) scale(1.03);box-shadow:0 6px 18px rgba(10,10,10,.12)}
+.mw-hover:active{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){.mw-hover,.mw-hover:hover{transition:none;transform:none}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--mw-background);color:var(--mw-foreground);font-family:var(--mw-font-body);-webkit-text-size-adjust:100%}
+body{min-height:100vh}
+.mw-hover{transition:transform var(--mw-dur) var(--mw-ease),box-shadow var(--mw-dur) var(--mw-ease),background-color var(--mw-dur) var(--mw-ease),color var(--mw-dur) var(--mw-ease)}
+.mw-hover:hover,.mw-hover:focus-visible{transform:translateY(-1px) scale(1.03);box-shadow:0 6px 18px rgba(10,10,10,.12)}
+.mw-hover:active{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){.mw-hover,.mw-hover:hover{transition:none;transform:none}}
+*{box-sizing:border-box}html,body{margin:0;background:#fff;color:var(--mw-foreground);font-family:var(--mw-font-body);-webkit-text-size-adjust:100%}
+.wrap{max-width:640px;margin:0 auto;padding:20px 18px 16px}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+h1,h2{font-family:var(--mw-font-heading);font-weight:700;line-height:1.1;margin:0}h1{font-size:34px}h2{font-size:24px}
+.wm{font-family:var(--mw-font-heading);font-weight:700;letter-spacing:var(--mw-tracking-label);font-size:13px;color:var(--mw-muted-text);white-space:nowrap}
+.btn{font-family:var(--mw-font-body);font-weight:600;text-transform:uppercase;letter-spacing:var(--mw-tracking-label);font-size:13px;min-height:44px;padding:10px 14px;border:2px solid var(--mw-primary);border-radius:0;background:#fff;color:var(--mw-primary);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.on,.btn.solid{background:var(--mw-primary);color:var(--mw-primary-foreground)}.btn.sm{font-size:12px;padding:8px 10px;flex:1 1 auto}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.stats{display:flex;justify-content:space-between;font-size:14px;color:var(--mw-muted-text);margin:12px 0 6px}
+.bar{height:4px;background:var(--mw-secondary);margin-bottom:14px}.bar i{display:block;height:100%;background:var(--mw-primary)}
+.card{background:var(--mw-secondary);border-radius:.75rem;padding:20px 16px;text-align:center;min-height:300px;display:flex;flex-direction:column;justify-content:center;gap:8px;cursor:pointer;position:relative}
+.tag{position:absolute;top:12px;left:14px;font-size:12px;color:var(--mw-muted-text);letter-spacing:var(--mw-tracking-label);text-transform:uppercase}
+.say{position:absolute;top:10px;right:10px;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--mw-primary);border-radius:0;background:#fff;color:var(--mw-primary);cursor:pointer;padding:0}.say svg{width:22px;height:22px}
+.glyph{font-family:var(--thai);font-size:110px;line-height:1.25}.th{font-family:var(--thai)}
+.big{font-size:34px;font-weight:600;line-height:1.25}.rom{font-size:30px;font-weight:600}
+.ans{border-top:1px solid var(--mw-border);margin-top:8px;padding-top:12px;display:flex;flex-direction:column;gap:6px;align-items:center}
+.pill{display:inline-block;border:1px solid var(--mw-primary);font-size:11px;letter-spacing:var(--mw-tracking-label);text-transform:uppercase;padding:2px 8px;margin:0 3px;font-weight:600}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;text-align:left;font-size:15px;max-width:440px;margin:4px auto 0}.kv b{font-weight:600}
+.muted{color:var(--mw-muted-text);font-size:15px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.row .btn{width:100%}.full{width:100%;margin-top:12px}
+.help{font-size:14px;color:var(--mw-muted-text);line-height:1.55;margin-top:18px;border-top:1px solid var(--mw-border);padding-top:12px}
+.anote{font-size:12px;color:var(--mw-muted-text)}
+.sharebar{display:flex;justify-content:center;margin:28px 0 0}
+footer{text-align:center;font-size:13px;color:var(--mw-muted-text);padding:24px 0 12px}footer a{color:var(--mw-muted-text);text-decoration:none;display:inline-flex;align-items:center;min-height:44px;padding:0 6px;border-bottom:1px solid rgba(115,115,115,.3)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--mw-primary);padding:8px 14px;font-size:14px;z-index:9}
+.hide{display:none!important}
+@media(min-width:1400px){.wrap{max-width:860px;padding-top:40px}.card{min-height:380px}.glyph{font-size:150px}.big{font-size:42px}}
+@media(min-width:2000px){html{font-size:18px}.wrap{max-width:1100px}h1{font-size:48px}.btn{font-size:15px;min-height:52px}.card{min-height:480px}.glyph{font-size:190px}.big{font-size:54px}.rom{font-size:40px}.help,.muted,.kv{font-size:18px}}
+</style></head><body><div class="wrap">
+<header><h1>Thai Word Flashcards</h1><span class="wm">MAX WEBERMAN</span></header>
+<p class="muted" style="margin:6px 0 0">The 94 active words. Say it, then reveal.</p>
+<div id="app"></div>
+<div class="sharebar"><button class="btn mw-hover" id="share" type="button">Share</button></div>
+<footer><a class="mw-hover" href="https://maxweberman.com" target="_blank" rel="noopener">Built by Max Weberman</a></footer>
+</div><script>
+const CARDS=[{"id": "w1", "n": 1, "en": "it", "rom": "man", "th": "มัน", "tone": "flat"}, {"id": "w2", "n": 2, "en": "stubborn", "rom": "dêua", "th": "ดื้อ", "tone": "falling"}, {"id": "w3", "n": 3, "en": "invite", "rom": "choen", "th": "เชิญ", "tone": "flat"}, {"id": "w4", "n": 4, "en": "rumor", "rom": "khàao-luea", "th": "ข่าวลือ", "tone": "low + flat"}, {"id": "w5", "n": 5, "en": "show off", "rom": "ùuat", "th": "อวด", "tone": "low"}, {"id": "w6", "n": 6, "en": "fill", "rom": "toem", "th": "เติม", "tone": "flat"}, {"id": "w7", "n": 7, "en": "false", "rom": "thét", "th": "เท็จ", "tone": "high"}, {"id": "w8", "n": 8, "en": "on", "rom": "bon", "th": "บน", "tone": "flat"}, {"id": "w9", "n": 9, "en": "open", "rom": "bpèrt", "th": "เปิด", "tone": "low"}, {"id": "w10", "n": 10, "en": "bitter", "rom": "khǒm", "th": "ขม", "tone": "rising"}, {"id": "w11", "n": 11, "en": "cut", "rom": "dtàt", "th": "ตัด", "tone": "low"}, {"id": "w12", "n": 12, "en": "beyond", "rom": "gern", "th": "เกิน", "tone": "flat"}, {"id": "w13", "n": 13, "en": "endure", "rom": "thon", "th": "ทน", "tone": "flat"}, {"id": "w14", "n": 14, "en": "pick up", "rom": "ráp", "th": "รับ", "tone": "high"}, {"id": "w15", "n": 15, "en": "fresh", "rom": "sòt", "th": "สด", "tone": "low"}, {"id": "w16", "n": 16, "en": "hands", "rom": "meua", "th": "มือ", "tone": "flat"}, {"id": "w17", "n": 17, "en": "carry", "rom": "thǔue", "th": "ถือ", "tone": "rising"}, {"id": "w18", "n": 18, "en": "pen", "rom": "bpàak-gaa", "th": "ปากกา", "tone": "low + flat"}, {"id": "w19", "n": 19, "en": "wind", "rom": "lom", "th": "ลม", "tone": "flat"}, {"id": "w20", "n": 20, "en": "religion", "rom": "sàat-sà-nǎa", "th": "ศาสนา", "tone": "low + low + rising"}, {"id": "w21", "n": 21, "en": "bottle", "rom": "khùuat", "th": "ขวด", "tone": "low"}, {"id": "w22", "n": 22, "en": "salt", "rom": "gluea", "th": "เกลือ", "tone": "flat"}, {"id": "w23", "n": 23, "en": "butter", "rom": "noei", "th": "เนย", "tone": "flat"}, {"id": "w24", "n": 24, "en": "begin", "rom": "rôerm", "th": "เริ่ม", "tone": "falling"}, {"id": "w25", "n": 25, "en": "needle", "rom": "khěm", "th": "เข็ม", "tone": "rising"}, {"id": "w26", "n": 26, "en": "wide", "rom": "gwâang", "th": "กว้าง", "tone": "falling"}, {"id": "w27", "n": 27, "en": "just / approx. (also: tattoo)", "rom": "sàk", "th": "สัก", "tone": "low"}, {"id": "w28", "n": 28, "en": "axe", "rom": "khwǎan", "th": "ขวาน", "tone": "rising"}, {"id": "w29", "n": 29, "en": "at all / altogether (particle)", "rom": "loei", "th": "เลย", "tone": "flat"}, {"id": "w30", "n": 30, "en": "hill / mound", "rom": "nern", "th": "เนิน", "tone": "flat"}, {"id": "w31", "n": 31, "en": "sour", "rom": "bprîao", "th": "เปรี้ยว", "tone": "falling"}, {"id": "w32", "n": 32, "en": "tear down / demolish", "rom": "rúue", "th": "รื้อ", "tone": "high"}, {"id": "w33", "n": 33, "en": "nail (finger/toe)", "rom": "lép", "th": "เล็บ", "tone": "high"}, {"id": "w34", "n": 34, "en": "adjust / fine (penalty)", "rom": "bpràp", "th": "ปรับ", "tone": "low"}, {"id": "w35", "n": 35, "en": "spirit / morale", "rom": "khwǎn", "th": "ขวัญ", "tone": "rising"}, {"id": "w36", "n": 36, "en": "round / circular", "rom": "glom", "th": "กลม", "tone": "flat"}, {"id": "w37", "n": 37, "en": "May I…?", "rom": "khǒr … dâi mái", "th": "ขอ…ได้ไหม", "tone": "rising · falling · high"}, {"id": "w38", "n": 38, "en": "skinny", "rom": "phǒm", "th": "ผอม", "tone": "rising"}, {"id": "w39", "n": 39, "en": "twin", "rom": "fǎa-bpàaet", "th": "ฝาแฝด", "tone": "rising + low"}, {"id": "w40", "n": 40, "en": "born", "rom": "gèrt", "th": "เกิด", "tone": "low"}, {"id": "w41", "n": 41, "en": "same room", "rom": "hông dieow gan", "th": "ห้องเดียวกัน", "tone": "falling · flat · flat"}, {"id": "w42", "n": 42, "en": "uncle", "rom": "lung", "th": "ลุง", "tone": "flat"}, {"id": "w43", "n": 43, "en": "movie theater", "rom": "rohng nǎng", "th": "โรงหนัง", "tone": "flat + rising"}, {"id": "w44", "n": 44, "en": "hospital", "rom": "rohng phá-yaa-baan", "th": "โรงพยาบาล", "tone": "flat + high + flat + flat"}, {"id": "w45", "n": 45, "en": "homework", "rom": "gaan-bâan", "th": "การบ้าน", "tone": "flat + falling"}, {"id": "w46", "n": 46, "en": "to check", "rom": "dtrùuat", "th": "ตรวจ", "tone": "low"}, {"id": "w47", "n": 47, "en": "to wake up", "rom": "dtèun", "th": "ตื่น", "tone": "low"}, {"id": "w48", "n": 48, "en": "to push", "rom": "phlàk", "th": "ผลัก", "tone": "low"}, {"id": "w49", "n": 49, "en": "to turn over", "rom": "phlík", "th": "พลิก", "tone": "high"}, {"id": "w50", "n": 50, "en": "get arrested", "rom": "thùuk jàp", "th": "ถูกจับ", "tone": "low · low"}, {"id": "w51", "n": 51, "en": "turn around", "rom": "hǎn glàb", "th": "หันกลับ", "tone": "rising · low"}, {"id": "w52", "n": 52, "en": "swollen", "rom": "buam", "th": "บวม", "tone": "flat"}, {"id": "w53", "n": 53, "en": "indifferent / leave alone / ignore", "rom": "chěoi", "th": "เฉย", "tone": "rising"}, {"id": "w54", "n": 54, "en": "termite", "rom": "bplùak", "th": "ปลวก", "tone": "low"}, {"id": "w55", "n": 55, "en": "wipe / wipe dry", "rom": "chét", "th": "เช็ด", "tone": "high"}, {"id": "w56", "n": 56, "en": "poke out / appear / show up", "rom": "phlò", "th": "โผล่", "tone": "low"}, {"id": "w57", "n": 57, "en": "smoke", "rom": "khwan", "th": "ควัน", "tone": "flat"}, {"id": "w58", "n": 58, "en": "cling / hang on / drag out", "rom": "yúue", "th": "ยื้อ", "tone": "high"}, {"id": "w59", "n": 59, "en": "change / switch", "rom": "bplìan", "th": "เปลี่ยน", "tone": "low"}, {"id": "w60", "n": 60, "en": "mock / taunt", "rom": "yéei", "th": "เย้ย", "tone": "high"}, {"id": "w61", "n": 61, "en": "build / create", "rom": "sâang", "th": "สร้าง", "tone": "falling"}, {"id": "w62", "n": 62, "en": "sway / rock; Thai verse form", "rom": "khloong", "th": "โคลง", "tone": "flat"}, {"id": "w63", "n": 63, "en": "collapse / sink / decline", "rom": "sút", "th": "ทรุด", "tone": "high"}, {"id": "w64", "n": 64, "en": "fire / blaze (literary)", "rom": "phleeng", "th": "เพลิง", "tone": "flat"}, {"id": "w65", "n": 65, "en": "water", "rom": "náam", "th": "น้ำ", "tone": "high"}, {"id": "w66", "n": 66, "en": "rice / food", "rom": "khâao", "th": "ข้าว", "tone": "falling"}, {"id": "w67", "n": 67, "en": "eat", "rom": "gin", "th": "กิน", "tone": "flat"}, {"id": "w68", "n": 68, "en": "go", "rom": "bpai", "th": "ไป", "tone": "flat"}, {"id": "w69", "n": 69, "en": "come", "rom": "maa", "th": "มา", "tone": "flat"}, {"id": "w70", "n": 70, "en": "want (to)", "rom": "yàak", "th": "อยาก", "tone": "low"}, {"id": "w71", "n": 71, "en": "near", "rom": "glâi", "th": "ใกล้", "tone": "falling"}, {"id": "w72", "n": 72, "en": "far", "rom": "glai", "th": "ไกล", "tone": "flat"}, {"id": "w73", "n": 73, "en": "house / home", "rom": "bâan", "th": "บ้าน", "tone": "falling"}, {"id": "w74", "n": 74, "en": "market", "rom": "dtà-làat", "th": "ตลาด", "tone": "low + low"}, {"id": "w75", "n": 75, "en": "left", "rom": "sáai", "th": "ซ้าย", "tone": "high"}, {"id": "w76", "n": 76, "en": "right", "rom": "khwǎa", "th": "ขวา", "tone": "rising"}, {"id": "w77", "n": 77, "en": "go straight", "rom": "dtrong bpai", "th": "ตรงไป", "tone": "flat + flat"}, {"id": "w78", "n": 78, "en": "stop", "rom": "yùt", "th": "หยุด", "tone": "low"}, {"id": "w79", "n": 79, "en": "here", "rom": "thîi-nîi", "th": "ที่นี่", "tone": "falling + falling"}, {"id": "w80", "n": 80, "en": "where?", "rom": "thîi-nǎi", "th": "ที่ไหน", "tone": "falling + rising"}, {"id": "w81", "n": 81, "en": "sleep", "rom": "nawn", "th": "นอน", "tone": "flat"}, {"id": "w82", "n": 82, "en": "drink", "rom": "dèum", "th": "ดื่ม", "tone": "low"}, {"id": "w83", "n": 83, "en": "coffee", "rom": "gaa-fae", "th": "กาแฟ", "tone": "flat + flat"}, {"id": "w84", "n": 84, "en": "chicken", "rom": "gài", "th": "ไก่", "tone": "low"}, {"id": "w85", "n": 85, "en": "pork", "rom": "mǔu", "th": "หมู", "tone": "rising"}, {"id": "w86", "n": 86, "en": "egg", "rom": "khài", "th": "ไข่", "tone": "low"}, {"id": "w87", "n": 87, "en": "noodle soup", "rom": "gǔay-dtǐao", "th": "ก๋วยเตี๋ยว", "tone": "rising + rising"}, {"id": "w88", "n": 88, "en": "hot (weather)", "rom": "rórn", "th": "ร้อน", "tone": "high"}, {"id": "w89", "n": 89, "en": "cold (weather)", "rom": "nǎao", "th": "หนาว", "tone": "rising"}, {"id": "w90", "n": 90, "en": "rain", "rom": "fǒn", "th": "ฝน", "tone": "rising"}, {"id": "w91", "n": 91, "en": "money", "rom": "ngern", "th": "เงิน", "tone": "flat"}, {"id": "w92", "n": 92, "en": "expensive", "rom": "phaeng", "th": "แพง", "tone": "flat"}, {"id": "w93", "n": 93, "en": "mountain (northern Thai)", "rom": "doi", "th": "ดอย", "tone": "flat"}, {"id": "w94", "n": 94, "en": "today", "rom": "wan-níi", "th": "วันนี้", "tone": "flat + high"}];
+const rng=(a,b)=>c=>c.n>=a&&c.n<=b;
+const CFG={key:"mw-thai-word-cards-v2-94",title:"Thai Word Flashcards",cards:CARDS,showWord:m=>m==="s2e"?"Meaning":"Sound",
+ modes:[{k:"e2s",l:"English To Sound"},{k:"s2e",l:"Sound To English"}],
+ filters:[{k:"all",l:"All",fn:()=>true},{k:"a",l:"1–24",fn:rng(1,24)},{k:"b",l:"25–48",fn:rng(25,48)},{k:"c",l:"49–72",fn:rng(49,72)},{k:"d",l:"73–94",fn:rng(73,94)}],
+ speak:w=>w.th,
+ front:(w,m)=>`<div class="tag">#${w.n}</div>`+(m==="s2e"?`<div class="rom">${esc(w.rom)}</div><div class="muted">${esc(w.tone)}</div>`:`<div class="big">${esc(w.en)}</div>`),
+ back:(w,m)=>(m==="s2e"?`<div class="big">${esc(w.en)}</div>`:`<div class="rom">${esc(w.rom)}</div><div class="muted">${esc(w.tone)}</div>`)+`<div class="th" lang="th" style="font-size:40px;line-height:1.5">${esc(w.th)}</div>`,
+ help:'<div class="help"><b>Tones:</b> flat (mid), low, falling, high, rising. Multi-syllable words list one tone per syllable. Tap the card or press Space to reveal. Arrow keys move, G = Got It, A = Again, S = play sound.</div>'};
+
+const $=id=>document.getElementById(id);let S;
+const SPK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg>';
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+const IDX={};CFG.cards.forEach(c=>IDX[c.id]=c);
+function deck(){const f=CFG.filters.find(x=>x.k===S.filter)||CFG.filters[0];return CFG.cards.filter(f.fn)}
+function build(sh){const ids=deck().map(c=>c.id);S.queue=sh?shuffle(ids):ids;S.pos=0;S.shown=false;S.shuffled=!!sh;save()}
+function save(){try{localStorage.setItem(CFG.key,JSON.stringify(S))}catch(e){}}
+function load(){try{S=JSON.parse(localStorage.getItem(CFG.key))}catch(e){}if(!S||typeof S!=="object")S={};S.got=S.got||{};S.again=S.again||{};S.filter=S.filter||CFG.filters[0].k;S.mode=S.mode||(CFG.modes?CFG.modes[0].k:"");
+ if(!S.queue||!S.queue.length)build(false);S.queue=S.queue.filter(i=>IDX[i]);if(!S.queue.length)build(false);if(!(S.pos>=0)||S.pos>S.queue.length)S.pos=0}
+function counts(){const d=deck();let g=0,a=0;d.forEach(c=>{if(S.got[c.id])g++;else if(S.again[c.id])a++});return{n:d.length,g,a}}
+function render(){const c=counts(),q=S.queue,done=S.pos>=q.length;let h="";
+ if(CFG.modes){h+='<div class="chips">'+CFG.modes.map(m=>`<button class="btn sm mw-hover${S.mode===m.k?" on":""}" data-mode="${m.k}">${m.l}</button>`).join("")+"</div>"}
+ h+='<div class="chips">'+CFG.filters.map(f=>`<button class="btn sm mw-hover${S.filter===f.k?" on":""}" data-filter="${f.k}">${f.l}</button>`).join("")+"</div>";
+ h+=`<div class="stats"><span>${done?q.length:S.pos+1}/${q.length}${S.shuffled?" · Shuffled":""}</span><span>${c.g} got it · ${c.a} again</span></div><div class="bar"><i style="width:${c.n?Math.round(100*c.g/c.n):0}%"></i></div>`;
+ if(done){h+=`<div class="card" style="cursor:default"><h2>Deck Finished</h2><p class="muted">${c.g} of ${c.n} marked Got It.</p></div><button class="btn solid mw-hover full" data-act="restart">Start Again</button><button class="btn mw-hover full" data-act="review">Practice Cards Not Yet Got</button>`}
+ else{const card=IDX[q[S.pos]],sp=CFG.speak(card);
+  h+=`<div class="card" data-act="flip">${CFG.front(card,S.mode)}${sp?`<button class="say mw-hover" type="button" data-say aria-label="Play sound">${SPK}</button>`:""}${S.shown?`<div class="ans">${CFG.back(card,S.mode)}</div>`:""}</div><div class="anote hide" id="anote">Audio not available on this device.</div>`;
+  h+=S.shown?'<div class="row"><button class="btn mw-hover" data-act="again">Again</button><button class="btn solid mw-hover" data-act="got">Got It</button></div>':`<button class="btn solid mw-hover full" data-act="flip">Show ${CFG.showWord(S.mode)}</button>`;
+  h+='<div class="row"><button class="btn mw-hover" data-act="prev">Prev</button><button class="btn mw-hover" data-act="next">Next</button></div>'}
+ h+='<div class="row" style="grid-template-columns:1fr 1fr 1fr"><button class="btn sm mw-hover" data-act="shuffle">Shuffle</button><button class="btn sm mw-hover" data-act="order">In Order</button><button class="btn sm mw-hover" data-act="reset">Reset</button></div>'+CFG.help;
+ $("app").innerHTML=h}
+function act(a){const q=S.queue,id=q[S.pos];
+ if(a==="flip"){if(S.pos<q.length)S.shown=!S.shown}else if(a==="next"){if(S.pos<q.length){S.pos++;S.shown=false}}else if(a==="prev"){if(S.pos>0){S.pos--;S.shown=false}}
+ else if(a==="got"){S.got[id]=1;delete S.again[id];S.pos++;S.shown=false}else if(a==="again"){delete S.got[id];S.again[id]=1;q.splice(Math.min(S.pos+5,q.length),0,id);S.pos++;S.shown=false}
+ else if(a==="shuffle")build(true);else if(a==="order")build(false);else if(a==="restart")build(S.shuffled);
+ else if(a==="review"){const ids=deck().map(c=>c.id).filter(i=>!S.got[i]);if(!ids.length)build(S.shuffled);else{S.queue=S.shuffled?shuffle(ids):ids;S.pos=0;S.shown=false}}
+ else if(a==="reset"){if(!confirm("Reset all progress for this deck?"))return;S={got:{},again:{},filter:S.filter,mode:S.mode};build(false)}
+ save();render()}
+$("app").addEventListener("click",e=>{const t=e.target.closest("[data-say],[data-act],[data-filter],[data-mode]");if(!t)return;
+ if(t.hasAttribute("data-say")){e.stopPropagation();const c=IDX[S.queue[S.pos]];if(c)say(CFG.speak(c));return}
+ if(t.dataset.filter){S.filter=t.dataset.filter;build(S.shuffled);render();return}if(t.dataset.mode){S.mode=t.dataset.mode;S.shown=false;save();render();return}act(t.dataset.act)});
+document.addEventListener("keydown",e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName)||e.metaKey||e.ctrlKey)return;const k=e.key;
+ if(k===" "||k==="Enter"){e.preventDefault();if(S.pos>=S.queue.length)return;if(S.shown&&k===" ")act("next");else act("flip")}
+ else if(k==="ArrowRight"){e.preventDefault();act("next")}else if(k==="ArrowLeft"){e.preventDefault();act("prev")}
+ else if((k==="g"||k==="G")&&S.shown)act("got");else if((k==="a"||k==="A")&&S.shown)act("again");else if(k==="s"||k==="S"){const c=IDX[S.queue[S.pos]];if(c&&CFG.speak(c))say(CFG.speak(c))}});
+/* audio */
+let V=null,VS=-9;function vs(x){const n=x.name||"";let s=0;if(/google/i.test(n))s+=4;if(/enhanced|premium|neural|natural|online/i.test(n))s+=4;if(x.localService===false)s+=2;if(/compact|espeak/i.test(n))s-=5;return s}
+function pv(){if(!("speechSynthesis" in window))return;const v=speechSynthesis.getVoices().filter(x=>/^th/i.test(x.lang)).sort((a,b)=>vs(b)-vs(a));V=v[0]||null;VS=V?vs(V):-9}
+if("speechSynthesis" in window){pv();speechSynthesis.onvoiceschanged=pv}
+const AU=new Audio();const nope=()=>{const n=$("anote");if(n)n.classList.remove("hide")};
+function gtts(t,fail){AU.volume=1;AU.onerror=fail;AU.src="https://translate.google.com/translate_tts?ie=UTF-8&tl=th&client=tw-ob&q="+encodeURIComponent(t);const p=AU.play();if(p&&p.catch)p.catch(fail)}
+function voice(t,fail){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="th-TH";try{u.voice=V}catch(_){}u.rate=.7;u.volume=1;u.onerror=e=>{if(e.error!=="interrupted"&&e.error!=="canceled")fail()};speechSynthesis.speak(u);return true}catch(e){return false}}
+function say(t){t=String(t).replace(/…/g," ").replace(/\s+/g," ").trim();if("speechSynthesis" in window&&!V)pv();if(V&&VS>0){if(!voice(t,()=>gtts(t,nope)))gtts(t,nope)}else gtts(t,()=>{if(!(V&&voice(t,nope)))nope()})}
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800)}
+$("share").onclick=async()=>{const c=counts(),url=location.href.split("?")[0],text=`${CFG.title}: ${c.g} of ${c.n} got it, ${c.a} to practise again.`;
+ if(navigator.share){try{await navigator.share({title:CFG.title,text,url});return}catch(e){if(e&&e.name==="AbortError")return}}
+ try{await navigator.clipboard.writeText(text+" "+url);toast("Copied")}catch(e){location.href="sms:?&body="+encodeURIComponent(text+" "+url)}};
+load();render();
+</script></body></html>

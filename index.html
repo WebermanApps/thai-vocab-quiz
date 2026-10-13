@@ -11,7 +11,7 @@
 --ok:#eef3ee;--bad:#f6eeee;color-scheme:light}
 .sayrow{display:flex;align-items:center;justify-content:center;gap:12px}
 .say{width:44px;height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--mw-primary);border-radius:0;background:#fff;color:var(--mw-primary);cursor:pointer;padding:0}
-.say.slow{font-size:20px;filter:grayscale(1);width:36px;height:36px;min-width:36px;margin-left:-6px}.cardrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px}.cardrow .auto{margin-top:0}.btn.skip{min-height:36px;padding:6px 14px;font-size:12px}
+.say.slow{width:auto;min-width:44px;height:44px;padding:0 10px;font-family:var(--mw-font-body);font-weight:600;font-size:12px;letter-spacing:var(--mw-tracking-label);text-transform:uppercase}.cardrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px}.cardrow .auto{margin-top:0}.btn.skip{min-height:36px;padding:6px 14px;font-size:12px}
 .say svg{width:22px;height:22px}.say.playing{background:var(--mw-primary);color:var(--mw-primary-foreground)}
 .auto{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--mw-muted-text);text-transform:uppercase;letter-spacing:var(--mw-tracking-label);margin-top:10px;cursor:pointer}
 .anote{font-size:12px;color:var(--mw-muted-text);margin-top:6px}
@@ -76,7 +76,7 @@ footer a{color:var(--mw-muted-text);text-decoration:none;border-bottom:1px solid
 <div class="stats"><span id="prog"></span><span id="score"></span></div>
 <div class="bar"><i id="barf"></i></div>
 <section id="quiz">
- <div class="card"><div class="num" id="num"></div><div class="sayrow"><div><div class="rom" id="rom"></div><div class="thai" id="thai" lang="th"></div></div><button class="say mw-hover" id="say" type="button" aria-label="Play Thai Pronunciation" title="Play (S or Space)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></button><button class="say slow mw-hover" id="slow" type="button" aria-label="Play Slowly" title="Play Slowly">🐢</button></div><div class="tone" id="tone"></div><div class="cardrow"><label class="auto"><input type="checkbox" id="autoplay"> Auto-play</label><button class="btn skip mw-hover" id="skip" type="button" aria-label="Skip Word" title="Skip (K)">Skip</button></div><div class="anote hide" id="anote">Audio not available on this device.</div></div>
+ <div class="card"><div class="num" id="num"></div><div class="sayrow"><div><div class="rom" id="rom"></div><div class="thai" id="thai" lang="th"></div></div><button class="say mw-hover" id="say" type="button" aria-label="Play Thai Pronunciation" title="Play (S or Space)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></button><button class="say slow mw-hover" id="slow" type="button" aria-label="Play Slowly" title="Play Slowly">Slow</button></div><div class="tone" id="tone"></div><div class="cardrow"><label class="auto"><input type="checkbox" id="autoplay"> Auto-play</label><button class="btn skip mw-hover" id="skip" type="button" aria-label="Skip Word" title="Skip (K)">Skip</button></div><div class="anote hide" id="anote">Audio not available on this device.</div></div>
  <div class="opts" id="opts"></div>
  <div class="fb" id="fb" aria-live="polite"></div>
  <button class="btn solid next mw-hover hide" id="next">Next ↵</button>
@@ -134,7 +134,7 @@ function render(){renderFilters();
   if(S.cur.pick!==null){b.disabled=true;if(o===w.en){b.classList.add("ok");b.insertAdjacentHTML("beforeend",ICON.ok)}else if(i===S.cur.pick){b.classList.add("bad");b.insertAdjacentHTML("beforeend",ICON.bad)}else b.classList.add("dim")}
   b.onclick=()=>pick(i);$("opts").appendChild(b)});
  const answered=S.cur.pick!==null,right=answered&&S.cur.opts[S.cur.pick]===w.en;
- $("fb").innerHTML=answered?(right?"✓ Correct":`✗ It means “${w.en}”`):"";$("next").classList.toggle("hide",!answered)}
+ $("fb").innerHTML=answered?(right?"Correct":`Wrong. It means “${w.en}”`):"";$("next").classList.toggle("hide",!answered)}
 function pick(i){if(!S.cur||S.cur.pick!==null)return;S.cur.pick=i;const n=S.cur.n,w=byN(n),right=S.cur.opts[i]===w.en,first=!S.missed.includes(n);
  S.queue.shift();if(right){S.done.push(n);if(first)S.correct++}else{if(first)S.missed.push(n);S.queue.splice(Math.min(S.queue.length,4+(Math.random()*4|0)),0,n)}
  save();render();$("next").focus()}
