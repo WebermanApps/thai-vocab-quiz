@@ -1,0 +1,219 @@
+{
+ "name": "Study Plan and Street Phrases",
+ "slug": "study-plan-street-phrases",
+ "agent": "thai",
+ "cards": [
+  {
+   "id": "study-1",
+   "cat": "Study Focus",
+   "q": "What should Thai teach next?",
+   "options": [
+    "More everyday phrases",
+    "Reading Thai letters",
+    "Tones and pronunciation",
+    "Numbers and prices"
+   ]
+  },
+  {
+   "id": "study-2",
+   "cat": "Study Focus",
+   "q": "How many new words per day feels right?",
+   "options": [
+    "3",
+    "5",
+    "8",
+    "10"
+   ]
+  },
+  {
+   "id": "study-3",
+   "cat": "Study Focus",
+   "q": "When do you usually study?",
+   "options": [
+    "Morning",
+    "Lunch break",
+    "Evening",
+    "Before bed"
+   ]
+  },
+  {
+   "id": "study-4",
+   "cat": "Study Focus",
+   "q": "How long is a good daily session?",
+   "options": [
+    "5 minutes",
+    "10 minutes",
+    "15 minutes",
+    "20 minutes or more"
+   ]
+  },
+  {
+   "id": "study-5",
+   "cat": "Study Focus",
+   "q": "How should review be mixed with new material?",
+   "options": [
+    "Mostly review",
+    "Half and half",
+    "Mostly new",
+    "Let Thai decide"
+   ]
+  },
+  {
+   "id": "phrases-1",
+   "cat": "Phrase Patterns",
+   "q": "Ordering food: learn which first?",
+   "options": [
+    "Asking for no spice (mai phet)",
+    "Ordering to go (sai thung)",
+    "Asking the price (thao rai)",
+    "Asking for the bill (check bin)"
+   ]
+  },
+  {
+   "id": "phrases-2",
+   "cat": "Phrase Patterns",
+   "q": "Taxi and Grab: priority?",
+   "options": [
+    "Giving directions (liao sai / liao khwa)",
+    "Stop here (jot thii nii)",
+    "How long to get there",
+    "Price talk"
+   ]
+  },
+  {
+   "id": "phrases-3",
+   "cat": "Phrase Patterns",
+   "q": "Market shopping phrases?",
+   "options": [
+    "Bargaining (lot dai mai)",
+    "Asking what something is",
+    "Counting and quantities",
+    "Not needed"
+   ]
+  },
+  {
+   "id": "phrases-4",
+   "cat": "Phrase Patterns",
+   "q": "Pharmacy and health phrases?",
+   "options": [
+    "Describing pain",
+    "Asking for medicine",
+    "Allergies",
+    "Later"
+   ]
+  },
+  {
+   "id": "phrases-5",
+   "cat": "Phrase Patterns",
+   "q": "Small talk with neighbors?",
+   "options": [
+    "Greetings and how are you",
+    "Weather talk",
+    "Family questions",
+    "Where are you going (pai nai)"
+   ]
+  },
+  {
+   "id": "vocab-1",
+   "cat": "Vocab Picks",
+   "q": "Food words next?",
+   "options": [
+    "Dishes on menus",
+    "Fruits",
+    "Cooking styles (fried, grilled)",
+    "Drinks"
+   ]
+  },
+  {
+   "id": "vocab-2",
+   "cat": "Vocab Picks",
+   "q": "Body and health words?",
+   "options": [
+    "Yes, soon",
+    "Later",
+    "No"
+   ]
+  },
+  {
+   "id": "vocab-3",
+   "cat": "Vocab Picks",
+   "q": "Home and household items?",
+   "options": [
+    "Kitchen",
+    "Bathroom",
+    "Furniture",
+    "Skip"
+   ]
+  },
+  {
+   "id": "vocab-4",
+   "cat": "Vocab Picks",
+   "q": "Feelings and moods?",
+   "options": [
+    "Basic (happy, tired, hungry)",
+    "More nuanced",
+    "Skip"
+   ]
+  },
+  {
+   "id": "vocab-5",
+   "cat": "Vocab Picks",
+   "q": "Weather and seasons?",
+   "options": [
+    "Yes",
+    "Later",
+    "No"
+   ]
+  },
+  {
+   "id": "feedback-1",
+   "cat": "Thai App Feedback",
+   "q": "Quiz audio speed?",
+   "options": [
+    "Good as is",
+    "Slower default",
+    "Faster default"
+   ]
+  },
+  {
+   "id": "feedback-2",
+   "cat": "Thai App Feedback",
+   "q": "Quiz answer choices?",
+   "options": [
+    "4 choices is right",
+    "Make it 3",
+    "Make it 6"
+   ]
+  },
+  {
+   "id": "feedback-3",
+   "cat": "Thai App Feedback",
+   "q": "Flashcard font size?",
+   "options": [
+    "Good",
+    "Bigger",
+    "Smaller"
+   ]
+  },
+  {
+   "id": "feedback-4",
+   "cat": "Thai App Feedback",
+   "q": "Show romanization on flashcards?",
+   "options": [
+    "Always",
+    "Tap to reveal",
+    "Never"
+   ]
+  },
+  {
+   "id": "feedback-5",
+   "cat": "Thai App Feedback",
+   "q": "Quiz session length?",
+   "options": [
+    "10 questions",
+    "20 questions",
+    "Endless"
+   ]
+  }
+ ]
+}

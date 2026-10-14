@@ -1,0 +1,222 @@
+{
+ "name": "Pace, Places and App Polish",
+ "slug": "pace-places-app-polish",
+ "agent": "thai",
+ "cards": [
+  {
+   "id": "study-6",
+   "cat": "Study Focus",
+   "q": "Daily tip delivery time?",
+   "options": [
+    "7 am",
+    "8 am",
+    "Noon",
+    "6 pm"
+   ]
+  },
+  {
+   "id": "study-7",
+   "cat": "Study Focus",
+   "q": "How formal should practice be?",
+   "options": [
+    "Polite (khrap) always",
+    "Casual with friends",
+    "Both, labeled",
+    "Not sure yet"
+   ]
+  },
+  {
+   "id": "study-8",
+   "cat": "Study Focus",
+   "q": "Should Thai track a weekly goal?",
+   "options": [
+    "Yes, words learned",
+    "Yes, minutes studied",
+    "Yes, both",
+    "No goals"
+   ]
+  },
+  {
+   "id": "study-9",
+   "cat": "Study Focus",
+   "q": "Learn tones now or later?",
+   "options": [
+    "Now, from the start",
+    "After 100 words",
+    "After 200 words",
+    "Only when asked"
+   ]
+  },
+  {
+   "id": "study-10",
+   "cat": "Study Focus",
+   "q": "How often should a full vocab check run?",
+   "options": [
+    "Weekly",
+    "Every two weeks",
+    "Monthly",
+    "Never"
+   ]
+  },
+  {
+   "id": "phrases-6",
+   "cat": "Phrase Patterns",
+   "q": "At the hotel or condo office?",
+   "options": [
+    "Something is broken",
+    "Package pickup",
+    "Water and power bills",
+    "Not needed"
+   ]
+  },
+  {
+   "id": "phrases-7",
+   "cat": "Phrase Patterns",
+   "q": "Phone calls in Thai?",
+   "options": [
+    "Answering politely",
+    "Asking someone to speak slowly (phut cha cha)",
+    "Spelling a name",
+    "Later"
+   ]
+  },
+  {
+   "id": "phrases-8",
+   "cat": "Phrase Patterns",
+   "q": "Restaurant compliments?",
+   "options": [
+    "Delicious (aroi)",
+    "Very full (im laew)",
+    "Thank you very much (khop khun mak)",
+    "All of these"
+   ]
+  },
+  {
+   "id": "phrases-9",
+   "cat": "Phrase Patterns",
+   "q": "Polite refusals?",
+   "options": [
+    "No thank you (mai ao khrap)",
+    "Not now",
+    "I am fine",
+    "All of these"
+   ]
+  },
+  {
+   "id": "phrases-10",
+   "cat": "Phrase Patterns",
+   "q": "Asking for help?",
+   "options": [
+    "Can you help me (chuai noi dai mai)",
+    "I do not understand (mai khao jai)",
+    "Please say again (phut ik thii)",
+    "All of these"
+   ]
+  },
+  {
+   "id": "vocab-6",
+   "cat": "Vocab Picks",
+   "q": "Colors and shapes?",
+   "options": [
+    "Yes",
+    "Later",
+    "No"
+   ]
+  },
+  {
+   "id": "vocab-7",
+   "cat": "Vocab Picks",
+   "q": "Family and relationships?",
+   "options": [
+    "Close family",
+    "Extended family",
+    "Friends and partners",
+    "Skip"
+   ]
+  },
+  {
+   "id": "vocab-8",
+   "cat": "Vocab Picks",
+   "q": "Work and business words?",
+   "options": [
+    "Office basics",
+    "Construction and repairs",
+    "Money and contracts",
+    "Skip"
+   ]
+  },
+  {
+   "id": "vocab-9",
+   "cat": "Vocab Picks",
+   "q": "Transport words?",
+   "options": [
+    "Car and motorbike",
+    "BTS, MRT and buses",
+    "Airport",
+    "Skip"
+   ]
+  },
+  {
+   "id": "vocab-10",
+   "cat": "Vocab Picks",
+   "q": "Nature and animals?",
+   "options": [
+    "Yes",
+    "Later",
+    "No"
+   ]
+  },
+  {
+   "id": "feedback-6",
+   "cat": "Thai App Feedback",
+   "q": "Missed words coming back?",
+   "options": [
+    "Feels right",
+    "Too often",
+    "Not often enough"
+   ]
+  },
+  {
+   "id": "feedback-7",
+   "cat": "Thai App Feedback",
+   "q": "Add typing answers to the quiz?",
+   "options": [
+    "Yes, romanization",
+    "Yes, Thai script",
+    "No"
+   ]
+  },
+  {
+   "id": "feedback-8",
+   "cat": "Thai App Feedback",
+   "q": "Letters app: what to add?",
+   "options": [
+    "Stroke order",
+    "Example words per letter",
+    "Letter quiz",
+    "Nothing"
+   ]
+  },
+  {
+   "id": "feedback-9",
+   "cat": "Thai App Feedback",
+   "q": "Words app: sorting?",
+   "options": [
+    "By theme",
+    "By date added",
+    "By difficulty",
+    "Fine as is"
+   ]
+  },
+  {
+   "id": "feedback-10",
+   "cat": "Thai App Feedback",
+   "q": "Dark mode for study apps?",
+   "options": [
+    "Yes",
+    "No",
+    "Follow phone setting"
+   ]
+  }
+ ]
+}

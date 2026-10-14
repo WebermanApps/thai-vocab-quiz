@@ -1,0 +1,214 @@
+{
+ "name": "Everyday Words and Weekly Rhythm",
+ "slug": "everyday-words-weekly-rhythm",
+ "agent": "thai",
+ "cards": [
+  {
+   "id": "study-11",
+   "cat": "Study Focus",
+   "q": "Listening practice priority?",
+   "options": [
+    "High",
+    "Medium",
+    "Low"
+   ]
+  },
+  {
+   "id": "study-12",
+   "cat": "Study Focus",
+   "q": "Should Thai add short weekend lessons?",
+   "options": [
+    "Yes, same length",
+    "Yes, shorter",
+    "No weekends"
+   ]
+  },
+  {
+   "id": "study-13",
+   "cat": "Study Focus",
+   "q": "Reading Thai script goal?",
+   "options": [
+    "Read menus and signs",
+    "Read simple sentences",
+    "Romanization is enough"
+   ]
+  },
+  {
+   "id": "study-14",
+   "cat": "Study Focus",
+   "q": "Speaking practice style?",
+   "options": [
+    "Repeat after audio",
+    "Answer prompts out loud",
+    "Role-play situations",
+    "Skip speaking"
+   ]
+  },
+  {
+   "id": "study-15",
+   "cat": "Study Focus",
+   "q": "Reminder style?",
+   "options": [
+    "One gentle reminder",
+    "Two reminders",
+    "No reminders"
+   ]
+  },
+  {
+   "id": "phrases-11",
+   "cat": "Phrase Patterns",
+   "q": "Time and appointments?",
+   "options": [
+    "Telling time",
+    "Days of the week",
+    "Making a booking",
+    "Later"
+   ]
+  },
+  {
+   "id": "phrases-12",
+   "cat": "Phrase Patterns",
+   "q": "Coffee shop orders?",
+   "options": [
+    "Less sweet (wan noi)",
+    "Iced or hot",
+    "Sizes",
+    "Skip"
+   ]
+  },
+  {
+   "id": "phrases-13",
+   "cat": "Phrase Patterns",
+   "q": "Bank and money phrases?",
+   "options": [
+    "Exchange money",
+    "Transfer",
+    "ATM problems",
+    "Skip"
+   ]
+  },
+  {
+   "id": "phrases-14",
+   "cat": "Phrase Patterns",
+   "q": "Emergencies?",
+   "options": [
+    "Call the police",
+    "Where is the hospital",
+    "I am lost",
+    "All of these"
+   ]
+  },
+  {
+   "id": "phrases-15",
+   "cat": "Phrase Patterns",
+   "q": "Compliments and thanks to staff?",
+   "options": [
+    "Short and simple",
+    "Warmer longer phrases",
+    "Both"
+   ]
+  },
+  {
+   "id": "vocab-11",
+   "cat": "Vocab Picks",
+   "q": "Clothing and sizes?",
+   "options": [
+    "Yes",
+    "Later",
+    "No"
+   ]
+  },
+  {
+   "id": "vocab-12",
+   "cat": "Vocab Picks",
+   "q": "Question words (who, what, where)?",
+   "options": [
+    "Yes, high priority",
+    "Already know them",
+    "Later"
+   ]
+  },
+  {
+   "id": "vocab-13",
+   "cat": "Vocab Picks",
+   "q": "Slang and casual words?",
+   "options": [
+    "Yes, a few",
+    "Later",
+    "No"
+   ]
+  },
+  {
+   "id": "vocab-14",
+   "cat": "Vocab Picks",
+   "q": "Numbers beyond 100?",
+   "options": [
+    "Yes, for prices",
+    "Later",
+    "No"
+   ]
+  },
+  {
+   "id": "vocab-15",
+   "cat": "Vocab Picks",
+   "q": "Places around town?",
+   "options": [
+    "Shops and services",
+    "Government offices",
+    "Temples and parks",
+    "Skip"
+   ]
+  },
+  {
+   "id": "feedback-11",
+   "cat": "Thai App Feedback",
+   "q": "Streaks or progress badges?",
+   "options": [
+    "Yes",
+    "Just a simple counter",
+    "No"
+   ]
+  },
+  {
+   "id": "feedback-12",
+   "cat": "Thai App Feedback",
+   "q": "Vocab Check flow?",
+   "options": [
+    "Good as is",
+    "Fewer words per check",
+    "Show only weak words"
+   ]
+  },
+  {
+   "id": "feedback-13",
+   "cat": "Thai App Feedback",
+   "q": "Example sentences in the quiz?",
+   "options": [
+    "After each answer",
+    "Only on wrong answers",
+    "No"
+   ]
+  },
+  {
+   "id": "feedback-14",
+   "cat": "Thai App Feedback",
+   "q": "Offline use?",
+   "options": [
+    "Important",
+    "Nice to have",
+    "Not needed"
+   ]
+  },
+  {
+   "id": "feedback-15",
+   "cat": "Thai App Feedback",
+   "q": "Which app do you open most?",
+   "options": [
+    "Quiz",
+    "Check",
+    "Letters",
+    "Words"
+   ]
+  }
+ ]
+}

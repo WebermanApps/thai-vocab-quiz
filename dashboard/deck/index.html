@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thai Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Khand:wght@700&family=Hind:wght@400;600&display=swap">
+<style>
+:root{--bg:#FDFBF6;--fg:#1d2a2c;--lagoon:#0E7C86;--tint:#E6F4F5;--line:#e3ddd0;--mut:#6b6f6a}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 Hind,system-ui,sans-serif;overflow-x:hidden}
+.wrap{max-width:720px;margin:0 auto;padding:14px 16px 40px}
+header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+h1{font:700 26px/1.1 Khand,sans-serif;margin:0;flex:1 1 200px}
+.prog{font-size:13px;color:var(--mut);width:100%}
+.btn{min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--lagoon);background:#fff;color:var(--lagoon);font:600 15px Hind,sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn.p{background:var(--lagoon);color:#fff}.btn:disabled{opacity:.5}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.cat{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--lagoon);font-weight:600}
+.q{font:700 24px/1.2 Khand,sans-serif;margin:6px 0 12px}
+.opts{display:grid;gap:8px}.opt{text-align:left;min-height:48px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--tint);font:16px Hind,sans-serif;color:var(--fg);cursor:pointer}
+.opt:hover{border-color:var(--lagoon)}
+textarea{width:100%;min-height:64px;margin-top:10px;border:1px solid var(--line);border-radius:10px;padding:10px;font:16px Hind,sans-serif}
+.row{display:flex;gap:8px;justify-content:space-between;margin-top:10px;flex-wrap:wrap}
+.mw-backdecks{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px;border-radius:12px;background:var(--lagoon);color:#fff;text-decoration:none;font-weight:600;margin-top:10px}
+.msg{padding:12px;border-radius:10px;background:var(--tint);margin:10px 0}
+</style><script src="https://webermanapps.github.io/style-swipe/submit.js"></script></head><body><div class="wrap">
+<header><h1 id="title">Thai Deck</h1><button class="btn p" id="submit" type="button">Submit</button><div class="prog" id="prog"></div></header>
+<main id="main"></main></div>
+<script>
+(async()=>{
+const qs=new URLSearchParams(location.search),slug=qs.get('d'),TEST=qs.get('test')==='1';
+const all=await (await fetch('decks.json?'+Date.now())).json();
+const meta=all.find(x=>x.slug===slug)||all[0];
+const D=await (await fetch(meta.slug+'.json?'+Date.now())).json();
+const K='thai-deck-'+D.slug,DONE='thai-decks-done';
+let S=JSON.parse(localStorage.getItem(K)||'{"a":{}}');
+const save=()=>localStorage.setItem(K,JSON.stringify(S));
+const $=id=>document.getElementById(id),main=$('main');
+document.title=D.name+' · Thai';$('title').textContent=(TEST?'TEST · ':'')+D.name;
+const back='<a class="mw-backdecks mw-hover" href="../#deck-launcher"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Back to Deck Building</span></a>';
+const left=()=>D.cards.filter(c=>!S.a[c.id]);
+function draw(){const L=left(),n=D.cards.length-L.length;$('prog').textContent=n+' of '+D.cards.length+' answered';
+ if(!L.length){main.innerHTML='<div class="msg">All cards answered. Tap Submit to send to Thai.</div>'+back;return}
+ const c=L[0];main.innerHTML='';const d=document.createElement('div');d.className='card';
+ d.innerHTML='<div class="cat"></div><div class="q"></div><div class="opts"></div><textarea placeholder="Notes (optional)"></textarea><div class="row"><button class="btn" type="button">Skip</button></div>';
+ d.querySelector('.cat').textContent=c.cat;d.querySelector('.q').textContent=c.q;
+ const ta=d.querySelector('textarea');
+ c.options.forEach(o=>{const b=document.createElement('button');b.className='opt';b.type='button';b.textContent=o;b.onclick=()=>{S.a[c.id]={pick:o,notes:ta.value.trim()};save();draw()};d.querySelector('.opts').append(b)});
+ d.querySelector('.row .btn').onclick=()=>{S.a[c.id]={skip:true,notes:ta.value.trim()};save();draw()};
+ main.append(d);main.insertAdjacentHTML('beforeend',back)}
+draw();
+$('submit').onclick=async()=>{const b=$('submit');b.disabled=true;b.textContent='Sending';
+ const un=left().map(c=>c.id),ans=D.cards.filter(c=>S.a[c.id]).map(c=>Object.assign({id:c.id,cat:c.cat,q:c.q},S.a[c.id]));
+ const ok=window.MWSubmit&&await MWSubmit.send({agent:'thai',app:'thai-dashboard-deck',deck:(TEST?'TEST-':'')+D.slug,
+  results:{deck:D.name,answers:ans,unanswered:un,total:20,partial:un.length>0,test:TEST},notes:TEST?'TEST submit (R66 check)':'',partial:un.length>0,answered:ans.length,total:20,unanswered:un,test:TEST});
+ if(ok){const done=JSON.parse(localStorage.getItem(DONE)||'[]');if(!done.includes(D.slug))done.push(D.slug);localStorage.setItem(DONE,JSON.stringify(done));localStorage.removeItem(K);
+  const nx=all.find(x=>!done.includes(x.slug));b.textContent='Sent';
+  main.innerHTML='<div class="msg">Sent to Thai.'+(nx?' Fresh deck ready: <b></b>':' Thai is preparing your next deck.')+'</div>'+(nx?'<a class="btn p" href="?d='+nx.slug+'">Open Next Deck</a> ':'')+back;
+  if(nx)main.querySelector('b').textContent=nx.name}
+ else{b.disabled=false;b.textContent='Submit';main.insertAdjacentHTML('afterbegin','<div class="msg">'+(window.MWSubmit&&MWSubmit.blocked?'Password needed to send. Nothing was sent.':'Not sent yet. Try again.')+'</div>')}};
+})();
+</script></body></html>
