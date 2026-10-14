@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14 14:20 ICT",
+ "updated": "2026-10-14 18:05 ICT",
  "routines": [
   {
    "name": "Thai Dashboard Morning Report",
@@ -13,7 +13,7 @@
    "group": "Reports",
    "schedule_plain": "Daily At 6:00 PM ICT",
    "status": "on",
-   "last_run": "Oct 13 6:04 PM"
+   "last_run": "Oct 14 6:03 PM"
   },
   {
    "name": "Daily Thai Phrase Tip",
@@ -27,7 +27,7 @@
    "group": "Event/Listener",
    "schedule_plain": "Hourly At :17 And :47 ICT",
    "status": "on",
-   "last_run": "Oct 14 1:51 PM"
+   "last_run": "Oct 14 5:49 PM"
   },
   {
    "name": "Ask Max About Thai Study Focus",
