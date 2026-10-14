@@ -65,8 +65,8 @@ footer{text-align:center;font-size:13px;color:var(--mw-muted-text);padding:28px 
 .hide{display:none!important}
 .sharebar{display:flex;justify-content:center;margin:28px 0 0}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--mw-primary);padding:8px 14px;font-size:14px;z-index:9}
-</style><script src="../submit.js?v=gr1"></script><script src="../ptr.js" defer></script></head><body><div class="wrap">
-<nav aria-label="Back"><a class="navback mw-hover" href="https://webermanapps.github.io/thai-vocab-quiz/dashboard/">← Thai Dashboard</a></nav>
+</style><script src="../submit.js?v=gr1"></script><script src="../ptr.js" defer></script><style id="catchup-1014">:root{--mw-background:#FDFBF6}html,body{background:#FDFBF6!important}.shareic{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;border:1px solid #05668D;border-radius:.5rem;background:#fff;color:#05668D;cursor:pointer;padding:0;flex:none}.shareic:hover{transform:scale(1.04)}@media(prefers-reduced-motion:reduce){.shareic:hover{transform:none}}nav.hd{display:flex;align-items:center;justify-content:space-between;gap:10px}.topbar .tb{margin-left:auto}.report .more summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#05668D}.report .keys{margin:6px 0 0}</style></head><body><div class="wrap">
+<nav class="hd" aria-label="Back"><a class="navback mw-hover" href="https://webermanapps.github.io/thai-vocab-quiz/dashboard/">← Thai Dashboard</a><button class="shareic mw-hover" id="share" type="button" aria-label="Share" title="Share"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></button></nav>
 <header><h1>Thai Vocab Check</h1><span class="wm">MAX WEBERMAN</span></header>
 <p class="sub">Answer each word once. Then tap Submit To Thai.</p>
 <div class="top"><div><b id="cOk">0</b><span>Correct</span></div><div><b id="cBad">0</b><span>Wrong</span></div><div><b id="cSk">0</b><span>Skipped</span></div><div><b id="cLeft">94</b><span>Left</span></div></div>
@@ -76,7 +76,7 @@ footer{text-align:center;font-size:13px;color:var(--mw-muted-text);padding:28px 
 <div id="submitBox"></div>
 <div class="subrow"><button class="btn mw-hover" id="submit" type="button">Share Or Copy</button><a class="btn mw-hover hide" id="sms" href="#">Send By SMS</a></div>
 <div style="text-align:center;margin-top:8px"><button class="reset" id="reset" type="button">Reset Progress</button></div>
-<div class="sharebar"><button class="btn mw-hover" id="share" type="button">Share</button></div>
+
 <footer><a class="mw-hover" href="https://maxweberman.com" target="_blank" rel="noopener">Built by Max Weberman</a></footer>
 </div>
 <script>
