@@ -1,0 +1,38 @@
+{
+ "agent": "thai",
+ "decks": [
+  {
+   "id": "thai-ready-1",
+   "name": "Study Focus",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-1-mkf28x/",
+   "total": 20,
+   "topic": "thai",
+   "blurb": "20 cards, ready now: Daily tip card and feed item layouts"
+  },
+  {
+   "id": "thai-ready-2",
+   "name": "Phrase Patterns",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-2-qupgdo/",
+   "total": 20,
+   "topic": "thai",
+   "blurb": "20 cards, ready now: Quiz answer style and progress views"
+  },
+  {
+   "id": "thai-ready-3",
+   "name": "Vocab Picks",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-3-lybd7i/",
+   "total": 20,
+   "topic": "thai",
+   "blurb": "20 cards, ready now: Review queue and quiz screen choices"
+  },
+  {
+   "id": "thai-ready-4",
+   "name": "Thai App Feedback",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-4-i3hvwu/",
+   "total": 20,
+   "topic": "thai",
+   "blurb": "20 cards, ready now: Daily tip and review screen choices"
+  }
+ ],
+ "updated": "2026-10-14T19:34:42+07:00"
+}
