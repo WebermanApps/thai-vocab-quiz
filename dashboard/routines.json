@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14 18:05 ICT",
+ "updated": "2026-10-14 20:10 ICT",
  "routines": [
   {
    "name": "Thai Dashboard Morning Report",
@@ -11,8 +11,8 @@
   {
    "name": "Thai Dashboard Evening Report",
    "group": "Reports",
-   "schedule_plain": "Daily At 6:00 PM ICT",
-   "status": "on",
+   "schedule_plain": "Daily At 6:00 PM ICT (Paused, Retired)",
+   "status": "paused",
    "last_run": "Oct 14 6:03 PM"
   },
   {
