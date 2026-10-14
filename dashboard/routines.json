@@ -1,6 +1,40 @@
-{"updated":"2026-10-14 14:25 ICT","routines":[
- {"name":"Thai Dashboard Morning Report","group":"Reports","schedule_plain":"Daily At 4:43 AM ICT (Due By 5:00 AM)","status":"on","last_run":"Today 4:54 AM"},
- {"name":"Thai Dashboard Evening Report","group":"Reports","schedule_plain":"Daily At 6:00 PM ICT","status":"on","last_run":"Yesterday 6:00 PM"},
- {"name":"Daily Thai Phrase Tip","group":"Daily","schedule_plain":"Every Day At 8:04 AM ICT","status":"on","last_run":"Today 8:04 AM"},
- {"name":"Check Thai App Submissions","group":"Event/Listener","schedule_plain":"Hourly At :17 And :47 ICT","status":"on","last_run":"Today 1:47 PM"},
- {"name":"Ask Max About Thai Study Focus","group":"Event/Listener","schedule_plain":"Once, Sat Oct 17 At 8:23 AM ICT","status":"on","last_run":"Not Run Yet"}]}
+{
+ "updated": "2026-10-14 14:20 ICT",
+ "routines": [
+  {
+   "name": "Thai Dashboard Morning Report",
+   "group": "Reports",
+   "schedule_plain": "Daily At 4:43 AM ICT (Due By 5:00 AM)",
+   "status": "on",
+   "last_run": "Oct 14 4:52 AM"
+  },
+  {
+   "name": "Thai Dashboard Evening Report",
+   "group": "Reports",
+   "schedule_plain": "Daily At 6:00 PM ICT",
+   "status": "on",
+   "last_run": "Oct 13 6:04 PM"
+  },
+  {
+   "name": "Daily Thai Phrase Tip",
+   "group": "Daily",
+   "schedule_plain": "Every Day At 8:04 AM ICT",
+   "status": "on",
+   "last_run": "Oct 14 8:06 AM"
+  },
+  {
+   "name": "Check Thai App Submissions",
+   "group": "Event/Listener",
+   "schedule_plain": "Hourly At :17 And :47 ICT",
+   "status": "on",
+   "last_run": "Oct 14 1:51 PM"
+  },
+  {
+   "name": "Ask Max About Thai Study Focus",
+   "group": "Event/Listener",
+   "schedule_plain": "Once, Sat Oct 17 At 8:23 AM ICT",
+   "status": "on",
+   "last_run": "Not Run Yet"
+  }
+ ]
+}
