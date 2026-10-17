@@ -2,12 +2,109 @@
  "agent": "thai",
  "decks": [
   {
+   "id": "thai-ready-1-daily-tip-card",
+   "name": "Study Focus: Daily Tip Card",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-1-daily-tip-card-r4mjvu/",
+   "total": 10,
+   "topic": "thai",
+   "answered": 0,
+   "added": "2026-10-17T08:05:35+07:00",
+   "split_from": "thai-ready-1",
+   "blurb": "10 cards, ready now"
+  },
+  {
+   "id": "thai-ready-1-open-items",
+   "name": "Study Focus: Open Items",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-1-open-items-keu0xf/",
+   "total": 10,
+   "topic": "thai",
+   "answered": 0,
+   "added": "2026-10-17T08:05:35+07:00",
+   "split_from": "thai-ready-1",
+   "blurb": "10 cards, ready now"
+  },
+  {
+   "id": "thai-ready-2-known-words",
+   "name": "Phrase Patterns: Known Words",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-2-known-words-xip7a7/",
+   "total": 10,
+   "topic": "thai",
+   "answered": 0,
+   "added": "2026-10-17T08:05:35+07:00",
+   "split_from": "thai-ready-2",
+   "blurb": "10 cards, ready now"
+  },
+  {
+   "id": "thai-ready-2-quiz-answers",
+   "name": "Phrase Patterns: Quiz Answers",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-2-quiz-answers-kk7g6m/",
+   "total": 10,
+   "topic": "thai",
+   "answered": 0,
+   "added": "2026-10-17T08:05:35+07:00",
+   "split_from": "thai-ready-2",
+   "blurb": "10 cards, ready now"
+  },
+  {
+   "id": "thai-ready-3-review-queue",
+   "name": "Vocab Picks: Review Queue",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-3-review-queue-9cg12r/",
+   "total": 10,
+   "topic": "thai",
+   "answered": 0,
+   "added": "2026-10-17T08:05:35+07:00",
+   "split_from": "thai-ready-3",
+   "blurb": "10 cards, ready now"
+  },
+  {
+   "id": "thai-ready-3-word-cards",
+   "name": "Vocab Picks: Word Cards",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-3-word-cards-yha148/",
+   "total": 10,
+   "topic": "thai",
+   "answered": 0,
+   "added": "2026-10-17T08:05:35+07:00",
+   "split_from": "thai-ready-3",
+   "blurb": "10 cards, ready now"
+  },
+  {
+   "id": "thai-ready-4-home-screen",
+   "name": "Thai App: Home Screen",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-4-home-screen-q8f3fc/",
+   "total": 10,
+   "topic": "thai",
+   "answered": 0,
+   "added": "2026-10-17T08:05:35+07:00",
+   "split_from": "thai-ready-4",
+   "blurb": "10 cards, ready now"
+  },
+  {
+   "id": "thai-ready-4-tone-hints",
+   "name": "Thai App: Tone Hints",
+   "url": "https://webermanapps.github.io/style-swipe/thai-ready-4-tone-hints-53csp3/",
+   "total": 10,
+   "topic": "thai",
+   "answered": 0,
+   "added": "2026-10-17T08:05:35+07:00",
+   "split_from": "thai-ready-4",
+   "blurb": "10 cards, ready now"
+  }
+ ],
+ "updated": "2026-10-17T08:05:35+07:00",
+ "unlisted": [
+  {
    "id": "thai-ready-1",
    "name": "Study Focus",
    "url": "https://webermanapps.github.io/style-swipe/thai-ready-1-mkf28x/",
    "total": 20,
    "topic": "thai",
-   "blurb": "20 cards, ready now: Daily tip card and feed item layouts"
+   "blurb": "20 cards, ready now: Daily tip card and feed item layouts",
+   "unlisted_at": "2026-10-17T08:05:35+07:00",
+   "split_into": [
+    "thai-ready-1-daily-tip-card",
+    "thai-ready-1-open-items"
+   ],
+   "note": "R86 (Max Oct 17 2026 07:50 ICT): unanswered 20-pick deck split into two 10-pick decks; original unlisted (page, file and any votes kept)"
   },
   {
    "id": "thai-ready-2",
@@ -15,7 +112,13 @@
    "url": "https://webermanapps.github.io/style-swipe/thai-ready-2-qupgdo/",
    "total": 20,
    "topic": "thai",
-   "blurb": "20 cards, ready now: Quiz answer style and progress views"
+   "blurb": "20 cards, ready now: Quiz answer style and progress views",
+   "unlisted_at": "2026-10-17T08:05:35+07:00",
+   "split_into": [
+    "thai-ready-2-known-words",
+    "thai-ready-2-quiz-answers"
+   ],
+   "note": "R86 (Max Oct 17 2026 07:50 ICT): unanswered 20-pick deck split into two 10-pick decks; original unlisted (page, file and any votes kept)"
   },
   {
    "id": "thai-ready-3",
@@ -23,7 +126,13 @@
    "url": "https://webermanapps.github.io/style-swipe/thai-ready-3-lybd7i/",
    "total": 20,
    "topic": "thai",
-   "blurb": "20 cards, ready now: Review queue and quiz screen choices"
+   "blurb": "20 cards, ready now: Review queue and quiz screen choices",
+   "unlisted_at": "2026-10-17T08:05:35+07:00",
+   "split_into": [
+    "thai-ready-3-review-queue",
+    "thai-ready-3-word-cards"
+   ],
+   "note": "R86 (Max Oct 17 2026 07:50 ICT): unanswered 20-pick deck split into two 10-pick decks; original unlisted (page, file and any votes kept)"
   },
   {
    "id": "thai-ready-4",
@@ -31,8 +140,17 @@
    "url": "https://webermanapps.github.io/style-swipe/thai-ready-4-i3hvwu/",
    "total": 20,
    "topic": "thai",
-   "blurb": "20 cards, ready now: Daily tip and review screen choices"
+   "blurb": "20 cards, ready now: Daily tip and review screen choices",
+   "unlisted_at": "2026-10-17T08:05:35+07:00",
+   "split_into": [
+    "thai-ready-4-home-screen",
+    "thai-ready-4-tone-hints"
+   ],
+   "note": "R86 (Max Oct 17 2026 07:50 ICT): unanswered 20-pick deck split into two 10-pick decks; original unlisted (page, file and any votes kept)"
   }
  ],
- "updated": "2026-10-14T19:34:42+07:00"
+ "cap": 10,
+ "cap_note": "R86 (Max Oct 17 2026 07:50 ICT): every shelf shows up to 10 decks (pinned included), 10 picks per deck; in-progress first, done last (kit deck-shelf.js sort)",
+ "held": [],
+ "queued": []
 }
