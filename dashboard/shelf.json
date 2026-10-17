@@ -88,9 +88,29 @@
    "added": "2026-10-17T08:05:35+07:00",
    "split_from": "thai-ready-4",
    "blurb": "10 cards, ready now"
+  },
+  {
+   "id": "thai-quiz-deck",
+   "name": "Quiz Deck",
+   "url": "https://webermanapps.github.io/style-swipe/thai-quiz-deck-9r2csd/",
+   "total": 10,
+   "topic": "thai",
+   "added": "2026-10-17T09:48:15+07:00",
+   "tag": "Quiz",
+   "blurb": "10 cards, ready now"
+  },
+  {
+   "id": "thai-progress-deck",
+   "name": "Progress Deck",
+   "url": "https://webermanapps.github.io/style-swipe/thai-progress-deck-gu1ckb/",
+   "total": 10,
+   "topic": "thai",
+   "added": "2026-10-17T09:48:29+07:00",
+   "tag": "Progress",
+   "blurb": "10 cards, ready now"
   }
  ],
- "updated": "2026-10-17T08:05:35+07:00",
+ "updated": "2026-10-17T09:55:08+07:00",
  "unlisted": [
   {
    "id": "thai-ready-1",
@@ -152,5 +172,6 @@
  "cap": 10,
  "cap_note": "R86 (Max Oct 17 2026 07:50 ICT): every shelf shows up to 10 decks (pinned included), 10 picks per deck; in-progress first, done last (kit deck-shelf.js sort)",
  "held": [],
- "queued": []
+ "queued": [],
+ "done": []
 }
